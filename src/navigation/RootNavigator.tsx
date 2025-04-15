@@ -1,30 +1,59 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Color } from "../constants/Colors";
-import { Icon } from "../components/ui/base/Icon";
-import HomeScreen from "../screens/home";
-import RestaurantScreen from "../screens/restaurants/RestaurantScreen";
-import HikingTrailsScreen from "../screens/hikingtrails/HikingTrailsScreen";
-import WeatherScreen from "../screens/weather/WeatherScreen";
+import {
+  createBottomTabNavigator,
+  BottomTabNavigationOptions,
+} from "@react-navigation/bottom-tabs";
+import { Color } from "../config/constants/Colors";
+import { Icon } from "../components/Icon";
+import HomeScreen from "../screens/home/HomeScreen";
+import CartScreen from "../screens/cart/CartScreen";
+import LoginScreen from "../screens/login/LoginScreen";
+import MenuScreen from "../screens/menu/MenuScreen";
+import { StyleProp, ViewStyle } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-const screenOptions = ({ route }: any) => ({
-  headerShown: false,
-  tabBarShowLabel: false,
-  tabBarStyle: {
-    backgroundColor: Color.BOTTOM_NAV_BAR,
-    justifyContent: "center", // center content vertically
-    alignItems: "center", // center content horizontally
-  },
-  tabBarIconStyle: {
-    marginTop: 10, // fine-tune vertical alignment
-  },
-  tabBarActiveTintColor: Color.NAV_ICON_ACTIVE ?? "rgb(235, 212, 111)",
-  tabBarInactiveTintColor: Color.NAV_ICON_INACTIVE ?? "rgba(247, 163, 54, 0.8)",
-  tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-    <Icon name={getIconName(route.name)} size={size} color={color} />
-  ),
-});
+// const screenOptions = ({ route }: any) => ({
+//   headerShown: false,
+//   tabBarShowLabel: false,
+//   tabBarStyle: {
+//     backgroundColor: Color.BOTTOM_NAV_BAR,
+//     justifyContent: 'center', // center content vertically
+//     alignItems: 'center', // center content horizontally
+//   },
+//   tabBarIconStyle: {
+//     marginTop: 10, // fine-tune vertical alignment
+//   },
+//   tabBarActiveTintColor: Color.NAV_ICON_ACTIVE ?? "rgb(235, 212, 111)",
+//   tabBarInactiveTintColor: Color.NAV_ICON_INACTIVE ?? "rgba(247, 163, 54, 0.8)",
+//   tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+//     <Icon name={getIconName(route.name)} size={size} color={color} />
+//   ),
+// });
+
+function screenOptions({
+  route,
+}: {
+  route: { name: string };
+}): BottomTabNavigationOptions {
+  return {
+    headerShown: false,
+    tabBarShowLabel: false,
+    tabBarStyle: {
+      backgroundColor: Color.BOTTOM_NAV_BAR,
+      justifyContent: "center",
+      alignItems: "center",
+    } as StyleProp<ViewStyle>,
+    tabBarIconStyle: {
+      marginTop: 10,
+    },
+    tabBarActiveTintColor: Color.NAV_ICON_ACTIVE ?? "rgb(235, 212, 111)",
+    tabBarInactiveTintColor:
+      Color.NAV_ICON_INACTIVE ?? "rgba(247, 163, 54, 0.8)",
+    tabBarIcon: ({ color, size }) => (
+      <Icon name={getIconName(route.name)} size={size} color={color} />
+    ),
+  };
+}
 
 /**
  * RootNavigator defines the bottom tab navigation for the app using React Navigation.
@@ -46,9 +75,9 @@ export default function RootNavigator() {
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Hiking" component={HikingTrailsScreen} />
-      <Tab.Screen name="Food" component={RestaurantScreen} />
-      <Tab.Screen name="Ski" component={WeatherScreen} />
+      <Tab.Screen name="Food" component={MenuScreen} />
+      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen name="Ski" component={LoginScreen} />
     </Tab.Navigator>
   );
 }

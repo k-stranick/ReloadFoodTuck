@@ -1,6 +1,6 @@
 // import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { Color } from "../../../constants/Colors";
+import { Color } from "../config/constants/Colors";
 
 type IconProps = {
   name: React.ComponentProps<typeof Ionicons>["name"];
