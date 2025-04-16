@@ -6,9 +6,9 @@ import {
   StyleProp,
   ViewStyle,
 } from "react-native";
-import { ThemedView } from "../layout/ThemedView";
-import { ThemedText } from "../layout/ThemedText";
-import { Color } from "../../../constants/Colors";
+import { ThemedView } from "./ThemedView";
+import { ThemedText } from "./ThemedText";
+import { Color } from "../config/constants/Colors";
 
 type CardProps = {
   title?: string;

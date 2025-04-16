@@ -2,8 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import RootNavigator from "./src/navigation/RootNavigator";
-
+import RootNavigator from "./src/navigation/BottomTabNavigator";
+import DrawerNavigator from "./src/navigation/DrawerNavigator";
+import Header from "./src/components/header/Header";
 export default function App() {
   return (
     // <View style={styles.container}>
@@ -13,17 +14,18 @@ export default function App() {
 
     <SafeAreaProvider>
       <NavigationContainer>
-        <RootNavigator />
+        <DrawerNavigator />
+        {/* <RootNavigator /> */}
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
