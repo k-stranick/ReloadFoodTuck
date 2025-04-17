@@ -60,39 +60,3 @@ export default function MenuScreen() {
     </View>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     padding: 16,
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: "bold",
-//     marginBottom: 16,
-//     textAlign: "center",
-//   },
-//   list: {
-//     paddingBottom: 16,
-//   },
-//   menuItem: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     padding: 16,
-//     marginBottom: 8,
-//     backgroundColor: "#f9f9f9",
-//     borderRadius: 8,
-//     shadowColor: "#000",
-//     shadowOpacity: 0.1,
-//     shadowRadius: 4,
-//     elevation: 2,
-//   },
-//   itemName: {
-//     fontSize: 18,
-//   },
-//   itemPrice: {
-//     fontSize: 18,
-//     fontWeight: "bold",
-//   },
-// });
