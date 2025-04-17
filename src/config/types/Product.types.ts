@@ -1,4 +1,3 @@
-//import type { ImageKey } from "../../../assets/images";
 
 export interface Item {
     readonly id: number;
@@ -6,10 +5,23 @@ export interface Item {
     readonly price: number;
     readonly img_url: string;
     readonly description?: string; // Optional property for description
+    toppings?: Array<{
+        id: number; // Unique identifier for the topping
+        name: string; // Name of the topping
+        price?: number; // Price of the topping
+        selected?: boolean; // Optional property to indicate if the topping is selected
+    }>
 }
 
-//TODO:RENAME addToCart
+export interface ItemDetailCardProps {
+    item: Item; // The item to be displayed in the card
+    onAddToCart: () => void; // Function to handle adding the item to the cart
+    onSelectTopping: (topping: any) => void; // Function to handle selecting a topping
+    quantity: number; // Quantity of the item in the cart
+}
+
 export interface ItemCardProps {
+    onPress?: () => void; // Optional onPress function for when the card is pressed
     readonly item: Item;
     readonly handlePress?: () => void; // Optional onPress function for when the card is pressed
     readonly handleButton?: (item: Item) => void; // Optional function to add item to cart with button (need to rename TODO:RENAME)

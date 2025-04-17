@@ -19,6 +19,13 @@ type CardProps = {
   style?: StyleProp<ViewStyle>;
   padding?: number;
   margin?: number;
+  titleTextType?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
+  subtitleTextType?:
+    | "default"
+    | "title"
+    | "defaultSemiBold"
+    | "subtitle"
+    | "link";
 };
 
 /**
@@ -58,20 +65,14 @@ export const Card = ({
   style,
   padding = 16,
   margin = 12,
+  titleTextType = "default",
+  subtitleTextType = "subtitle",
 }: CardProps) => {
   const content = (
     <ThemedView style={[styles.card, { padding, margin }, style]}>
       {image && <Image source={{ uri: image }} style={styles.image} />}
-      {title && (
-        <ThemedText type="title" style={styles.title}>
-          {title}
-        </ThemedText>
-      )}
-      {subtitle && (
-        <ThemedText type="subtitle" style={styles.subtitle}>
-          {subtitle}
-        </ThemedText>
-      )}
+      {title && <ThemedText type={titleTextType}>{title}</ThemedText>}
+      {subtitle && <ThemedText type={subtitleTextType}>{subtitle}</ThemedText>}
       {children}
     </ThemedView>
   );
@@ -98,13 +99,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 12,
   },
-  title: {
-    textAlign: "center",
-  },
-  subtitle: {
-    marginBottom: 8,
-    fontSize: 14,
-    textAlign: "center",
-    fontStyle: "italic",
-  },
+  // title: {
+  //   // textAlign: "center",
+  //   fontSize: 1,
+  // },
+  // subtitle: {
+  //   marginBottom: 8,
+  //   fontSize: 14,
+  //   textAlign: "center",
+  //   fontStyle: "italic",
+  // },
 });
