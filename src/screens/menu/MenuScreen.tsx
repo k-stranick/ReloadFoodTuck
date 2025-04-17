@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, FlatList, ActivityIndicator, Text } from "react-native";
 import { universalFetch } from "../../services/fetchApi";
-import { ItemCard } from "./QuickAccessItemCard"; // Adjust the import path
+import { QuickItemCard } from "./QuickItemCard"; // Adjust the import path
 import { useResponsiveColumns } from "../../hooks/useResponsiveColumns";
 
 type MenuItem = {
@@ -43,7 +43,7 @@ export default function MenuScreen() {
         key={numColumns}
         numColumns={numColumns}
         renderItem={(props: { item: MenuItem }) => (
-          <ItemCard
+          <QuickItemCard
             item={{
               id: props.item.id,
               name: props.item.name,
