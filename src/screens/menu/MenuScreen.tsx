@@ -1,43 +1,65 @@
-// import React from "react";
-// import {
-//   View,
-//   Text,
-//   StyleSheet,
-//   FlatList,
-//   TouchableOpacity,
-// } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, FlatList, ActivityIndicator, Text } from "react-native";
+import { universalFetch } from "../../services/fetchApi";
+import { ItemCard } from "./QuickAccessItemCard"; // Adjust the import path
+import { useResponsiveColumns } from "../../hooks/useResponsiveColumns";
 
-// const MenuScreen = () => {
-//   const menuItems = [
-//     { id: "1", name: "Burger", price: "$5.99" },
-//     { id: "2", name: "Pizza", price: "$8.99" },
-//     { id: "3", name: "Tacos", price: "$3.99" },
-//     { id: "4", name: "Salad", price: "$4.99" },
-//   ];
+type MenuItem = {
+  id: number;
+  name: string;
+  description: string;
+  base_price: number;
+  img_url: string;
+};
 
-//   const renderMenuItem = ({
-//     item,
-//   }: {
-//     item: { id: string; name: string; price: string };
-//   }) => (
-//     <TouchableOpacity style={styles.menuItem}>
-//       <Text style={styles.itemName}>{item.name}</Text>
-//       <Text style={styles.itemPrice}>{item.price}</Text>
-//     </TouchableOpacity>
-//   );
+export default function MenuScreen() {
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const numColumns = useResponsiveColumns({
+    minWidth: 200,
+    minColumns: 2,
+    maxColumns: 4,
+  });
 
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Menu</Text>
-//       <FlatList
-//         data={menuItems}
-//         renderItem={renderMenuItem}
-//         keyExtractor={(item) => item.id}
-//         contentContainerStyle={styles.list}
-//       />
-//     </View>
-//   );
-// };
+  useEffect(() => {
+    const loadMenu = async () => {
+      const data = await universalFetch<MenuItem[]>("foodMenuQuick"); // apiConfig key
+      if (data) setMenuItems(data);
+      setLoading(false);
+    };
+
+    loadMenu();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator size="large" />;
+  }
+
+  return (
+    <View style={{ padding: 16 }}>
+      <FlatList
+        data={menuItems}
+        keyExtractor={(item) => item.id.toString()}
+        key={numColumns}
+        numColumns={numColumns}
+        renderItem={(props: { item: MenuItem }) => (
+          <ItemCard
+            item={{
+              id: props.item.id,
+              name: props.item.name,
+              price: props.item.base_price,
+              img_url: props.item.img_url,
+            }}
+            handlePress={() => {
+              console.log("Tapped:", props.item.name);
+              // navigate to item detail
+            }}
+          />
+        )}
+      />
+    </View>
+  );
+}
 
 // const styles = StyleSheet.create({
 //   container: {
@@ -74,61 +96,3 @@
 //     fontWeight: "bold",
 //   },
 // });
-
-// export default MenuScreen;
-
-import React, { useEffect, useState } from "react";
-import { View, FlatList, ActivityIndicator, Text } from "react-native";
-import { universalFetch } from "../../services/fetchApi";
-import { apiConfig } from "../../services/apiConfig";
-import { ItemCard } from "./QuickAccessItemCard"; // Adjust the import path
-import { useResponsiveColumns } from "../../hooks/useResponsiveColumns";
-type MenuItem = {
-  id: number;
-  name: string;
-  description: string;
-  base_price: number;
-  img_url?: string;
-};
-
-export default function MenuScreen() {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadMenu = async () => {
-      const data = await universalFetch<MenuItem[]>("foodMenuQuick"); // apiConfig key
-      if (data) setMenuItems(data);
-      setLoading(false);
-    };
-
-    loadMenu();
-  }, []);
-
-  if (loading) {
-    return <ActivityIndicator size="large" />;
-  }
-
-  return (
-    <View style={{ padding: 16 }}>
-      <FlatList
-        data={menuItems}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <ItemCard
-            item={{
-              id: item.id,
-              name: item.name,
-              price: item.base_price,
-              img_url: item.img_url,
-            }}
-            handlePress={() => {
-              console.log("Tapped:", item.name);
-              // navigate to item detail
-            }}
-          />
-        )}
-      />
-    </View>
-  );
-}

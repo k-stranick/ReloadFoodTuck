@@ -1,4 +1,3 @@
-//import type { ImageKey } from "../../../assets/images";
 
 export interface Item {
     readonly id: number;
@@ -8,7 +7,6 @@ export interface Item {
     readonly description?: string; // Optional property for description
 }
 
-//TODO:RENAME addToCart
 export interface ItemCardProps {
     readonly item: Item;
     readonly handlePress?: () => void; // Optional onPress function for when the card is pressed
