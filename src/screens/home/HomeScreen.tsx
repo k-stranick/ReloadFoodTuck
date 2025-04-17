@@ -6,8 +6,8 @@ const HomeScreen = ({ navigation }: any) => {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Reload Food Truck!</Text>
       <Button
-        title="Explore Menu"
-        onPress={() => navigation.navigate("MenuScreen")}
+        title="Create Order"
+        onPress={() => navigation.navigate("Cart")}
       />
     </View>
   );

@@ -27,7 +27,7 @@ export default function DrawerNavigator() {
         options={{ title: "Home" }}
       />
       <Drawer.Screen
-        name="Food"
+        name="Menu"
         component={MenuScreen}
         options={{ title: "Menu" }}
       />
