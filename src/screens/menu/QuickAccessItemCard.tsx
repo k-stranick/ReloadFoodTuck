@@ -1,6 +1,4 @@
-import { images } from "../../assets/images";
-import { styles } from "./ItemCard.style";
-import { ItemCardProps } from "../../types/interfaces/products/Product.types";
+import { ItemCardProps } from "../../config/types/Product.types";
 import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
 
 //TODO:RENAME addToCart and onPress to be more descriptive for card press and add to cart or button display and press and add to cart
@@ -32,7 +30,7 @@ function renderCardContent(
     <>
       <View style={styles.imageContainer}>
         <Image
-          source={images[item.image]}
+          source={{ uri: item.img_url }}
           style={styles.image}
           resizeMode="cover"
         />

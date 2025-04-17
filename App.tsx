@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import RootNavigator from "./src/navigation/BottomTabNavigator";
+// import RootNavigator from "./src/navigation/BottomTabNavigator";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import Header from "./src/components/header/Header";
 export default function App() {

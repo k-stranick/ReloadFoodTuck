@@ -1,11 +1,10 @@
 //import type { ImageKey } from "../../../assets/images";
 
-
 export interface Item {
     readonly id: number;
     readonly name: string;
     readonly price: number;
-    // readonly image: ImageKey;
+    readonly img_url: string;
     readonly description?: string; // Optional property for description
 }
 
