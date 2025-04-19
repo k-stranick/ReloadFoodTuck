@@ -13,7 +13,7 @@ export const ItemDetailCard = ({
   <Card
     image={item.img_url}
     title={item.name}
-    subtitle={`$${item.price}`}
+    subtitle={`$${item.base_price}`}
     style={{ marginHorizontal: 16 }}
   >
     <ThemedText>{item.description}</ThemedText>

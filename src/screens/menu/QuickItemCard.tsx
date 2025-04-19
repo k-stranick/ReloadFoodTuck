@@ -6,7 +6,7 @@ export const QuickItemCard = ({ item, onPress }: ItemCardProps) => (
   <Card
     image={item.img_url}
     title={item.name}
-    subtitle={`$${item.price}`}
+    subtitle={`$${item.base_price}`}
     onPress={onPress}
     style={{ flex: 1 }} // ensures compatibility with FlatList grids
   />

@@ -18,7 +18,11 @@
 
 export const apiConfig = {
     foodMenuQuick: {
-        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/",
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/menu-items",
+        method: "GET",
+    },
+    toppingFetch: {
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/toppings",
         method: "GET",
     },
     postExample: {

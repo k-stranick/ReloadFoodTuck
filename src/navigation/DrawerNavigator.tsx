@@ -6,6 +6,7 @@ import CartScreen from "../screens/cart/CartScreen";
 import LoginScreen from "../screens/login/LoginScreen";
 import MenuScreen from "../screens/menu/MenuScreen";
 import { StyleProp, ViewStyle } from "react-native";
+import MenuStackNavigator from "./MenuStackNavigator";
 
 const Drawer = createDrawerNavigator();
 
@@ -28,7 +29,7 @@ export default function DrawerNavigator() {
       />
       <Drawer.Screen
         name="Menu"
-        component={MenuScreen}
+        component={MenuStackNavigator}
         options={{ title: "Menu" }}
       />
       <Drawer.Screen

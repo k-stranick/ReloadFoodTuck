@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { View, FlatList, ActivityIndicator, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import { universalFetch } from "../../services/fetchApi";
-import { QuickItemCard } from "./QuickItemCard"; // Adjust the import path
+import { QuickItemCard } from "./QuickItemCard";
 import { useResponsiveColumns } from "../../hooks/useResponsiveColumns";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MenuStackParamList } from "../../navigation/MenuStackNavigator";
+import { Item } from "../../config/types/Product.types"; // Adjust the import path as necessary
 
-type MenuItem = {
-  id: number;
-  name: string;
-  description: string;
-  base_price: number;
-  img_url: string;
+type MenuScreenProps = {
+  navigation: NativeStackNavigationProp<MenuStackParamList, "MenuScreen">;
 };
 
-export default function MenuScreen() {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+export default function MenuScreen({ navigation }: MenuScreenProps) {
+  const [menuItems, setMenuItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const numColumns = useResponsiveColumns({
     minWidth: 200,
@@ -23,7 +22,7 @@ export default function MenuScreen() {
 
   useEffect(() => {
     const loadMenu = async () => {
-      const data = await universalFetch<MenuItem[]>("foodMenuQuick"); // apiConfig key
+      const data = await universalFetch<Item[]>("foodMenuQuick");
       if (data) setMenuItems(data);
       setLoading(false);
     };
@@ -42,18 +41,16 @@ export default function MenuScreen() {
         keyExtractor={(item) => item.id.toString()}
         key={numColumns}
         numColumns={numColumns}
-        renderItem={(props: { item: MenuItem }) => (
+        renderItem={({ item }: { item: Item }) => (
           <QuickItemCard
             item={{
-              id: props.item.id,
-              name: props.item.name,
-              price: props.item.base_price,
-              img_url: props.item.img_url,
+              id: item.id,
+              name: item.name,
+              base_price: item.base_price,
+              img_url: item.img_url,
+              description: item.description,
             }}
-            handlePress={() => {
-              console.log("Tapped:", props.item.name);
-              // navigate to item detail
-            }}
+            onPress={() => navigation.navigate("ItemDetailScreen", { item })}
           />
         )}
       />

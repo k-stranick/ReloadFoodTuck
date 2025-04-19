@@ -2,7 +2,8 @@
 export interface Item {
     readonly id: number;
     readonly name: string;
-    readonly price: number;
+    readonly price?: number;
+    readonly base_price?: number; // Optional property for base price
     readonly img_url: string;
     readonly description?: string; // Optional property for description
     toppings?: Array<{
