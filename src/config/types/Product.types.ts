@@ -6,12 +6,16 @@ export interface Item {
     readonly base_price?: number; // Optional property for base price
     readonly img_url: string;
     readonly description?: string; // Optional property for description
-    toppings?: Array<{
-        id: number; // Unique identifier for the topping
-        name: string; // Name of the topping
-        price?: number; // Price of the topping
-        selected?: boolean; // Optional property to indicate if the topping is selected
-    }>
+    toppings?: Topping[];
+    excludedToppings: Topping[];
+}
+
+export interface Topping {
+    id: number; // Unique identifier for the topping
+    name: string; // Name of the topping
+    price?: number; // Price of the topping
+    selected?: boolean; // Optional property to indicate if the topping is selected
+    default?: boolean; // optional property to indicate if the topping is default
 }
 
 export interface ItemDetailCardProps {
@@ -30,4 +34,5 @@ export interface ItemCardProps {
 
 export interface CartItem extends Item {
     quantity: number; // Quantity of the item in the cart
+    selectedToppings?: Topping[];
 }

@@ -1,15 +1,17 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Pressable } from "react-native";
 import { Card } from "../../components/Card";
 import { ItemCardProps } from "../../config/types/Product.types";
 
 export const QuickItemCard = ({ item, onPress }: ItemCardProps) => (
-  <Card
-    image={item.img_url}
-    title={item.name}
-    subtitle={`$${item.base_price}`}
-    onPress={onPress}
-    style={{ flex: 1 }} // ensures compatibility with FlatList grids
-  />
+  <Pressable style={{ flex: 1 }} onPress={onPress}>
+    <Card
+      image={item.img_url}
+      title={item.name}
+      subtitle={`$${item.base_price}`}
+      // onPress={onPress}
+      style={{ flex: 1 }} // ensures compatibility with FlatList grids
+    />
+  </Pressable>
 );
 
 // export const styles = StyleSheet.create({

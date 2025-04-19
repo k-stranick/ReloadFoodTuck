@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleProp,
   ViewStyle,
+  View,
 } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
@@ -61,7 +62,7 @@ export const Card = ({
   subtitle,
   image,
   children,
-  onPress,
+  // onPress,
   style,
   padding = 16,
   margin = 12,
@@ -77,13 +78,7 @@ export const Card = ({
     </ThemedView>
   );
 
-  return onPress ? (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      {content}
-    </TouchableOpacity>
-  ) : (
-    content
-  );
+  return <View>{content}</View>;
 };
 
 const styles = StyleSheet.create({
