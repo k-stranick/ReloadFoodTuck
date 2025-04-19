@@ -4,13 +4,13 @@ import { universalFetch } from "../../services/fetchApi";
 import { Item, Topping } from "../../config/types/Product.types";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { addToCart } from "../../redux/slices/cartSlice";
-import { useNavigation } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { MenuStackParamList } from "../../navigation/MenuStackNavigator";
+import type { RootStackParamList } from "../../navigation/RootStackParam";
 
 export default function ItemDetailScreen({ route }) {
   const navigation =
-    useNavigation<NativeStackNavigationProp<MenuStackParamList>>();
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { item }: { item: Item } = route.params;
   const [itemWithToppings, setItemWithToppings] = useState(item);
 
@@ -64,7 +64,7 @@ export default function ItemDetailScreen({ route }) {
     );
     navigation.reset({
       index: 0,
-      routes: [{ name: "MenuScreen" }],
+      routes: [{ name: "Menu" }],
     });
   };
   return (
