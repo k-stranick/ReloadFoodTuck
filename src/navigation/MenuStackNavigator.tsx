@@ -17,7 +17,7 @@ export default function MenuStackNavigator() {
       <Stack.Screen
         name="MenuScreen"
         component={MenuScreen}
-        // options={{ title: "Menu" }}
+        options={{ title: "Menu" }}
       />
       <Stack.Screen
         name="ItemDetailScreen"

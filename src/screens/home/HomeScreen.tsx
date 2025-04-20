@@ -24,9 +24,8 @@ const HomeScreen = ({ navigation }: any) => {
             marginTop: 20,
           }}
         >
-          <ThemedText style={{ color: "white", fontSize: 18 }}>
-            {" "}
-            //TODO Create Order
+          <ThemedText type="default" style={{ fontSize: 18 }}>
+            Create Order
           </ThemedText>
         </Pressable>
       </View>

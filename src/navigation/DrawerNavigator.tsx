@@ -13,8 +13,26 @@ const Drawer = createDrawerNavigator();
 export default function DrawerNavigator() {
   return (
     <Drawer.Navigator
-      screenOptions={{ headerTitleAlign: "center" }}
       initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Color.HEADER,
+        },
+        headerTitleAlign: "center",
+        headerTintColor: Color.BRIGHT_ORANGE,
+        drawerInactiveTintColor: Color.STEEL_SILVER,
+        drawerActiveTintColor: Color.BRIGHT_ORANGE,
+        drawerItemStyle: { marginVertical: 5 },
+        drawerLabelStyle: {
+          fontSize: 16,
+          fontWeight: "500",
+        },
+        drawerStyle: {
+          backgroundColor: Color.BACKGROUND,
+
+          // width: 240,
+        },
+      }}
     >
       <Drawer.Screen
         name="Login"
@@ -30,7 +48,21 @@ export default function DrawerNavigator() {
       <Drawer.Screen
         name="Menu"
         component={MenuStackNavigator}
-        options={{ title: "Menu" }}
+        options={({ navigation }) => ({
+          title: "Menu",
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Cart")}
+              style={{ marginRight: 12 }} // ensures it's not cut off
+            >
+              <Text
+                style={{ color: "#007bff", fontSize: 16, fontWeight: "500" }}
+              >
+                cart
+              </Text>
+            </TouchableOpacity>
+          ),
+        })}
       />
       <Drawer.Screen
         name="Cart"
