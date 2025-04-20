@@ -92,8 +92,9 @@ const styles = StyleSheet.create({
   toppingIndicator: {
     width: 20,
     height: 20,
-    borderWidth: 1,
-    borderColor: "#ccc",
+    borderWidth: 3,
+    borderRadius: 6,
+    borderColor: Color.BOX_OUTLINE,
     marginRight: 8,
   },
   actionRow: {
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.BUTTON_COLOR2_PRESSED,
   },
   buttonText: {
-    color: "white",
+    color: Color.TEXT,
     textAlign: "center",
     fontWeight: "bold",
   },

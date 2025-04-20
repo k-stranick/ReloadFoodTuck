@@ -9,7 +9,7 @@ type CardProps = {
   subtitle?: string;
   image?: string;
   children?: React.ReactNode;
-  onPress?: () => void;
+  // onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   padding?: number;
   margin?: number;
@@ -20,6 +20,7 @@ type CardProps = {
     | "defaultSemiBold"
     | "subtitle"
     | "link";
+  textColor?: string;
 };
 
 /**
@@ -61,12 +62,21 @@ export const Card = ({
   margin = 12,
   titleTextType = "default",
   subtitleTextType = "subtitle",
-}: CardProps) => {
+  textColor,
+}: CardProps): JSX.Element => {
   const content = (
     <ThemedView style={[styles.card, { padding, margin }, style]}>
       {image && <Image source={{ uri: image }} style={styles.image} />}
-      {title && <ThemedText type={titleTextType}>{title}</ThemedText>}
-      {subtitle && <ThemedText type={subtitleTextType}>{subtitle}</ThemedText>}
+      {title && (
+        <ThemedText color={textColor} type={titleTextType}>
+          {title}
+        </ThemedText>
+      )}
+      {subtitle && (
+        <ThemedText color={textColor} type={subtitleTextType}>
+          {subtitle}
+        </ThemedText>
+      )}
       {children}
     </ThemedView>
   );

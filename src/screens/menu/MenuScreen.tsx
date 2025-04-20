@@ -6,10 +6,11 @@ import { useResponsiveColumns } from "../../hooks/useResponsiveColumns";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MenuStackParamList } from "../../navigation/MenuStackNavigator";
 import { Item } from "../../config/types/Product.types"; // Adjust the import path as necessary
+import { ThemedView } from "../../components/ThemedView";
 
-type MenuScreenProps = {
+type MenuScreenProps = Readonly<{
   navigation: NativeStackNavigationProp<MenuStackParamList, "MenuScreen">;
-};
+}>;
 
 export default function MenuScreen({ navigation }: MenuScreenProps) {
   const [menuItems, setMenuItems] = useState<Item[]>([]);
@@ -35,27 +36,29 @@ export default function MenuScreen({ navigation }: MenuScreenProps) {
   }
 
   return (
-    <View style={{ padding: 16 }}>
-      <FlatList
-        data={menuItems}
-        keyExtractor={(item) => item.id.toString()}
-        key={numColumns}
-        numColumns={numColumns}
-        renderItem={(
-          { item }: { item: Item } //TODO: WHY IS THIS THROWING AN ERROR
-        ) => (
-          <QuickItemCard
-            item={{
-              id: item.id,
-              name: item.name,
-              base_price: item.base_price,
-              img_url: item.img_url,
-              description: item.description,
-            }}
-            onPress={() => navigation.navigate("ItemDetailScreen", { item })}
-          />
-        )}
-      />
-    </View>
+    <ThemedView>
+      <View style={{ padding: 16 }}>
+        <FlatList
+          data={menuItems}
+          keyExtractor={(item) => item.id.toString()}
+          key={numColumns}
+          numColumns={numColumns}
+          renderItem={(
+            { item }: { item: Item } //TODO: WHY IS THIS THROWING AN ERROR
+          ) => (
+            <QuickItemCard
+              item={{
+                id: item.id,
+                name: item.name,
+                base_price: item.base_price,
+                img_url: item.img_url,
+                description: item.description,
+              }}
+              onPress={() => navigation.navigate("ItemDetailScreen", { item })}
+            />
+          )}
+        />
+      </View>
+    </ThemedView>
   );
 }

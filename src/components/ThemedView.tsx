@@ -1,5 +1,6 @@
 import { View, ViewProps, StyleSheet } from "react-native";
 import { Color } from "../config/constants/Colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 type ThemedViewProps = ViewProps & {
   // lightColor?: string;

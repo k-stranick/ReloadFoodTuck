@@ -1,39 +1,77 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
+import { Color } from '../../config/constants/Colors';
 
 export const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20, backgroundColor: "#fff" },
-    header: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
-    empty: { fontSize: 18, color: "#999" },
-    itemRow: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingVertical: 10,
-        borderBottomWidth: 1,
-        borderColor: "#eee",
-    },
-    itemText: { fontSize: 16 },
-    itemPrice: { fontSize: 16, color: "#444" },
-    remove: { fontSize: 18, color: "red", paddingHorizontal: 10 },
+    container: { flex: 1, padding: 20 },
+    header: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
+    empty: { fontSize: 18, color: '#999' },
     total: {
         marginTop: 20,
-        fontSize: 20,
-        fontWeight: "bold",
-        textAlign: "right",
+        textAlign: 'right',
     },
     clear: {
-        marginTop: 10,
         fontSize: 16,
-        color: "blue",
-        textAlign: "right",
-        textDecorationLine: "underline",
     },
     clearButton: {
-        backgroundColor: "#f8f8f8",
+        backgroundColor: Color.BUTTON_COLOR2,
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        minWidth: 100,
+    },
+    checkoutButton: {
+        backgroundColor: Color.BUTTON_COLOR2,
         padding: 10,
         borderRadius: 5,
-        alignItems: "center",
+        alignItems: 'center',
         marginTop: 20,
-    }
-});
+    },
+    cartRow: {
+        flexDirection: "row",
+        alignItems: "flex-start",
+        paddingVertical: 12,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
+    },
+    removeButton: {
+        fontSize: 18,
+        paddingHorizontal: 8,
+        paddingTop: 4,
+    },
+    itemContent: {
+        flex: 1,
+        paddingRight: 8,
+    },
+    mods: {
+        fontSize: 14,
+        color: "#666",
+        marginTop: 2,
+    },
+    priceColumn: {
+        justifyContent: "flex-start",
+        alignItems: "flex-end",
+        minWidth: 70,
+    },
+    headerRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
+        backgroundColor: "#f9f9f9",
+    },
+    cartHeaderRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
+    },
 
+});

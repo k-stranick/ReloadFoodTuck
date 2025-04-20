@@ -1,6 +1,7 @@
 import { StyleSheet, Pressable } from "react-native";
 import { Card } from "../../components/Card";
 import { ItemCardProps } from "../../config/types/Product.types";
+import { Color } from "../../config/constants/Colors";
 
 export const QuickItemCard = ({ item, onPress }: ItemCardProps) => (
   <Pressable style={{ flex: 1 }} onPress={onPress}>
@@ -9,7 +10,15 @@ export const QuickItemCard = ({ item, onPress }: ItemCardProps) => (
       title={item.name}
       subtitle={`$${item.base_price}`}
       // onPress={onPress}
-      style={{ flex: 1 }} // ensures compatibility with FlatList grids
+      style={styles.card} // ensures compatibility with FlatList grids
+      // textColor={Color.GUNMETAL_GRAY}
     />
   </Pressable>
 );
+
+const styles = StyleSheet.create({
+  card: {
+    flex: 1,
+    backgroundColor: Color.BRIGHT_ORANGE,
+  },
+});

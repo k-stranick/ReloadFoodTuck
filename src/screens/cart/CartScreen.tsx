@@ -1,8 +1,17 @@
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
-// import { CartItem } from "../../types/interfaces/products/Product.types";
+import { CartItem } from "../../config/types/Product.types";
 import { removeFromCart, clearCart } from "../../redux/slices/cartSlice";
 import { styles } from "./CartScreen.styles";
+import { ThemedView } from "../../components/ThemedView";
+import { ThemedText } from "../../components/ThemedText";
+import { Color } from "../../config/constants/Colors";
 
 export default function CartScreen() {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
@@ -16,54 +25,112 @@ export default function CartScreen() {
   const handleClearCart = () => {
     dispatch(clearCart());
   };
-  //TODO NEED TO WORK ON WIDTH IT WILL NOT WRAP THUS GETS CUT OFF
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>🛒 Your Cart</Text>
-
-      {cartItems.length === 0 ? (
-        <Text style={styles.empty}>Your cart is empty.</Text>
-      ) : (
-        <>
-          <FlatList
-            data={cartItems}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={(
-              { item } //TODO: fix this type error
-            ) => (
-              <View style={styles.itemRow}>
-                <Text style={styles.itemText}>
-                  {item.name} x {item.quantity}
-                </Text>
-
-                {(item.excludedToppings ?? []).length > 0 && (
-                  <Text>
-                    No: {item.excludedToppings?.map((t) => t.name).join(", ")}
-                  </Text>
-                )}
-
-                <Text style={styles.itemPrice}>
-                  {/* ${item.price.toFixed(2)} ea */}
-                </Text>
-                <Text
-                  style={styles.remove}
-                  onPress={() => handleRemove(item.id)}
-                >
-                  ❌
-                </Text>
-              </View>
-            )}
-          />
-
-          <Text style={styles.total}>Total: ${totalPrice.toFixed(2)}</Text>
-          <TouchableOpacity
-            onPress={handleClearCart}
-            style={styles.clearButton}
+    <ThemedView>
+      <View style={styles.container}>
+        <View style={styles.cartHeaderRow}>
+          <ThemedText type="title" style={styles.header}>
+            🛒 Your Cart
+          </ThemedText>
+          {cartItems.length > 0 && (
+            <Pressable onPress={handleClearCart} style={styles.clearButton}>
+              <Text style={styles.clear}>Clear Cart</Text>
+            </Pressable>
+          )}
+        </View>
+        <View style={styles.headerRow}>
+          <ThemedText type="defaultSemiBold" style={{ flex: 1 }}>
+            Item
+          </ThemedText>
+          <ThemedText
+            type="defaultSemiBold"
+            style={{ width: 70, textAlign: "right" }}
           >
-            <Text style={styles.clear}>🧹 Clear Cart</Text>
-          </TouchableOpacity>
-        </>
-      )}
-    </View>
+            Price
+          </ThemedText>
+        </View>
+        {cartItems.length === 0 ? (
+          <Text style={styles.empty}>Your cart is empty.</Text>
+        ) : (
+          <>
+            <FlatList<CartItem>
+              data={cartItems}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => {
+                const priceEach = item.base_price ?? 0;
+                const totalItemPrice = priceEach * item.quantity;
+
+                return (
+                  <View style={styles.cartRow}>
+                    {/* Remove Button */}
+                    <Text
+                      style={styles.removeButton}
+                      onPress={() => handleRemove(item.id)}
+                    >
+                      ❌
+                    </Text>
+
+                    {/* Item + Mods Block */}
+                    <View style={styles.itemContent}>
+                      <ThemedText
+                        color={Color.BRIGHT_ORANGE}
+                        type="defaultSemiBold"
+                      >
+                        {item.name} x {item.quantity}
+                      </ThemedText>
+
+                      {(item.excludedToppings ?? []).length > 0 && (
+                        <Text style={styles.mods}>
+                          No:{" "}
+                          {item.excludedToppings?.map((t) => t.name).join(", ")}
+                        </Text>
+                      )}
+                      {/* 
+                    {item.selectedToppings?.filter((t) => !t.default).length >
+                      0 && (
+                      <Text style={styles.mods}>
+                        Add:{" "}
+                        {item.selectedToppings
+                          .filter((t) => !t.default)
+                          .map(
+                            (t) =>
+                              `${t.name}${
+                                t.price ? ` (+$${t.price.toFixed(2)})` : ""
+                              }`
+                          )
+                          .join(", ")}
+                      </Text>
+                    )} */}
+                    </View>
+                    {/* Price Column */}
+                    <View style={styles.priceColumn}>
+                      <ThemedText
+                        color={Color.BRIGHT_ORANGE}
+                        type="defaultSemiBold"
+                      >
+                        ${totalItemPrice.toFixed(2)}
+                      </ThemedText>
+                    </View>
+                  </View>
+                );
+              }}
+            />
+
+            <ThemedText type="title" style={styles.total}>
+              Total: ${totalPrice.toFixed(2)}
+            </ThemedText>
+            <TouchableOpacity
+              onPress={handleClearCart}
+              style={styles.checkoutButton}
+            >
+              <ThemedText type="title" color={Color.TEXT}>
+                Checkout
+              </ThemedText>
+            </TouchableOpacity>
+          </>
+        )}
+      </View>
+    </ThemedView>
   );
 }
