@@ -19,10 +19,23 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.k_stran.ReloadFoodTuck"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b1cb2ff2-2c6b-440f-9d68-955e3e3ad026"
+      }
+    },
+    "owner": "k_stran",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b1cb2ff2-2c6b-440f-9d68-955e3e3ad026"
     }
   }
 }
