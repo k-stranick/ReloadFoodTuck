@@ -49,7 +49,7 @@ export const ItemDetailCard = ({
 
       {/* Toppings */}
       <View style={styles.toppingSection}>
-        <ThemedText style={styles.toppingLabel}>Toppings:</ThemedText>
+        <ThemedText style={styles.toppingLabel}>Remove Toppings:</ThemedText>
         <FlatList
           data={item.toppings}
           keyExtractor={(topping) => topping.id.toString()}
