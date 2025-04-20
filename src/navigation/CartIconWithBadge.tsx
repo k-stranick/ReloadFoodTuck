@@ -1,10 +1,12 @@
 import React from "react";
-import { Pressable, View, Text } from "react-native";
+import { Pressable, View, ViewStyle, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useAppSelector } from "../../hooks/reduxHooks";
-
-type Props = { onPress: () => void };
-
+import { useAppSelector } from "../hooks/reduxHooks";
+import { Color } from "../config/constants/Colors";
+type Props = {
+  onPress: () => void;
+  // style?: ViewStyle;
+};
 export default function CartIconWithBadge({ onPress }: Props) {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -20,9 +22,10 @@ export default function CartIconWithBadge({ onPress }: Props) {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
+        marginRight: 15,
       }}
     >
-      <Ionicons name="cart-outline" size={24} color="white" />
+      <Ionicons name="cart-outline" size={24} color={Color.BRIGHT_ORANGE} />
       {totalQuantity > 0 && (
         <View
           pointerEvents="none"
@@ -30,7 +33,7 @@ export default function CartIconWithBadge({ onPress }: Props) {
             position: "absolute",
             top: 2,
             right: 2,
-            backgroundColor: "red",
+            backgroundColor: Color.BRIGHT_ORANGE,
             borderRadius: 8,
             width: 16,
             height: 16,
@@ -38,7 +41,7 @@ export default function CartIconWithBadge({ onPress }: Props) {
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "white", fontSize: 10, fontWeight: "bold" }}>
+          <Text style={{ color: Color.TEXT, fontSize: 10, fontWeight: "bold" }}>
             {totalQuantity}
           </Text>
         </View>

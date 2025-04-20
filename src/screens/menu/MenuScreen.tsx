@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MenuStackParamList } from "../../navigation/MenuStackNavigator";
 import { Item } from "../../config/types/Product.types"; // Adjust the import path as necessary
 import { ThemedView } from "../../components/ThemedView";
+import { Color } from "../../config/constants/Colors";
 
 type MenuScreenProps = Readonly<{
   navigation: NativeStackNavigationProp<MenuStackParamList, "MenuScreen">;

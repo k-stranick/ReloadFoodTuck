@@ -124,7 +124,7 @@ export default function CartScreen() {
               onPress={handleClearCart}
               style={styles.checkoutButton}
             >
-              <ThemedText type="title" color={Color.TEXT}>
+              <ThemedText type="checkout" color={Color.TEXT}>
                 Checkout
               </ThemedText>
             </TouchableOpacity>

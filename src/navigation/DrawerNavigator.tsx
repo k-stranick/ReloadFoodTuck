@@ -7,6 +7,7 @@ import LoginScreen from "../screens/login/LoginScreen";
 import MenuScreen from "../screens/menu/MenuScreen";
 import { StyleProp, ViewStyle, TouchableOpacity, Text } from "react-native";
 import MenuStackNavigator from "./MenuStackNavigator";
+import CartIconWithBadge from "./CartIconWithBadge";
 
 const Drawer = createDrawerNavigator();
 
@@ -51,16 +52,7 @@ export default function DrawerNavigator() {
         options={({ navigation }) => ({
           title: "Menu",
           headerRight: () => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Cart")}
-              style={{ marginRight: 12 }} // ensures it's not cut off
-            >
-              <Text
-                style={{ color: "#007bff", fontSize: 16, fontWeight: "500" }}
-              >
-                cart
-              </Text>
-            </TouchableOpacity>
+            <CartIconWithBadge onPress={() => navigation.navigate("Cart")} />
           ),
         })}
       />

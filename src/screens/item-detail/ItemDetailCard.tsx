@@ -45,7 +45,7 @@ export const ItemDetailCard = ({
       subtitle={`$${item.base_price}`}
       style={styles.card}
     >
-      <ThemedText>{item.description}</ThemedText>
+      <ThemedText type="subtitle">{item.description}</ThemedText>
 
       {/* Toppings */}
       <View style={styles.toppingSection}>
