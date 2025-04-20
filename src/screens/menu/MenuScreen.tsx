@@ -41,7 +41,9 @@ export default function MenuScreen({ navigation }: MenuScreenProps) {
         keyExtractor={(item) => item.id.toString()}
         key={numColumns}
         numColumns={numColumns}
-        renderItem={({ item }: { item: Item }) => (
+        renderItem={(
+          { item }: { item: Item } //TODO: WHY IS THIS THROWING AN ERROR
+        ) => (
           <QuickItemCard
             item={{
               id: item.id,

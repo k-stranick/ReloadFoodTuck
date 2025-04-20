@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  StyleProp,
-  ViewStyle,
-  View,
-} from "react-native";
+import { Image, StyleSheet, StyleProp, ViewStyle, View } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { Color } from "../config/constants/Colors";
@@ -83,10 +76,20 @@ export const Card = ({
 
 const styles = StyleSheet.create({
   card: {
-    overflow: "hidden",
+    // overflow: "hidden",
     borderRadius: 16,
     maxWidth: 380,
-    backgroundColor: Color.DUSTY_BEIGE,
+    backgroundColor: Color.CARD,
+    // borderColor: Color.BORDER,
+    // borderWidth: 4,
+    // Android shadow
+    elevation: 5,
+
+    // iOS shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
   },
   image: {
     width: "100%",
@@ -94,14 +97,4 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 12,
   },
-  // title: {
-  //   // textAlign: "center",
-  //   fontSize: 1,
-  // },
-  // subtitle: {
-  //   marginBottom: 8,
-  //   fontSize: 14,
-  //   textAlign: "center",
-  //   fontStyle: "italic",
-  // },
 });

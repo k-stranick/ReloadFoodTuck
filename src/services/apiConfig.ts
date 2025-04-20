@@ -21,10 +21,19 @@ export const apiConfig = {
         url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/menu-items",
         method: "GET",
     },
-    toppingFetch: {
-        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/toppings",
+    menu_item_toppings: {
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/menu_item_toppings",
         method: "GET",
     },
+    additionalToppings: {
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/additional_toppings",
+        method: "GET",
+    },
+    // itemToppingsCombined: {
+    //     url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/item_toppings_combined",
+    //     method: "GET",
+    //   },
+
     postExample: {
         url: "https://api.example.com/post",
         method: "POST",

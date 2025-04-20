@@ -7,7 +7,7 @@ export const addItemToCart = (
     selectedToppings: Topping[] = []
 ) => {
     const excludedToppings = selectedToppings
-        .filter((t) => t.default && !t.selected);
+        .filter((t) => t.default && t.selected);
 
     const toppingKey = excludedToppings.map((t) => `no-${t.id}`).sort().join("-");
 
@@ -28,7 +28,7 @@ export const addItemToCart = (
         state.cartItems.push(newItem);
     }
 
-    const basePrice = item.base_price ?? item.price ?? 0;
+    const basePrice = item.base_price;
     state.totalQuantity += 1;
     state.totalPrice += basePrice;
 };
@@ -39,7 +39,7 @@ export const removeItemFromCart = (state: CartState, itemId: number) => {
 
     if (existingItem) {
         state.totalQuantity -= existingItem.quantity;
-        state.totalPrice -= existingItem.price * existingItem.quantity;
+        state.totalPrice -= existingItem.base_price * existingItem.quantity;
         state.cartItems = state.cartItems.filter(
             (cartItem) => cartItem.id !== itemId
         );
@@ -51,3 +51,7 @@ export const clearCartItems = (state: CartState) => {
     state.totalQuantity = 0;
     state.totalPrice = 0;
 };
+
+
+//base_price + (existingItem.excludedToppings?.reduce((acc, topping) => acc + (topping.price ?? 0), 0) ?? 0)
+// + (existingItem.toppings?.reduce((acc, topping) => acc + (topping.price ?? 0), 0) ?? 0) // Add the price of selected toppings

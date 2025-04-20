@@ -2,12 +2,12 @@
 export interface Item {
     readonly id: number;
     readonly name: string;
-    readonly price?: number;
-    readonly base_price?: number; // Optional property for base price
+    // readonly price: number;
+    readonly base_price: number; // Optional property for base price
     readonly img_url: string;
     readonly description?: string; // Optional property for description
     toppings?: Topping[];
-    excludedToppings: Topping[];
+    excludedToppings?: Topping[];
 }
 
 export interface Topping {
@@ -21,7 +21,7 @@ export interface Topping {
 export interface ItemDetailCardProps {
     item: Item; // The item to be displayed in the card
     onAddToCart: () => void; // Function to handle adding the item to the cart
-    onSelectTopping: (topping: any) => void; // Function to handle selecting a topping
+    onSelectTopping: (topping: Topping) => void; // Function to handle selecting a topping
     quantity: number; // Quantity of the item in the cart
 }
 

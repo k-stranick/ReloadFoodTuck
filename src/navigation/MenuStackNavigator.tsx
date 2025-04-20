@@ -21,7 +21,7 @@ export default function MenuStackNavigator() {
       />
       <Stack.Screen
         name="ItemDetailScreen"
-        component={ItemDetailScreen}
+        component={ItemDetailScreen} //TODO
         // options={{ title: "Item Detail" }}
       />
     </Stack.Navigator>

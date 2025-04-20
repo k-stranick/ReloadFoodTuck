@@ -7,8 +7,16 @@ import { addToCart } from "../../redux/slices/cartSlice";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { RootStackParamList } from "../../navigation/RootStackParam";
+import type { RouteProp } from "@react-navigation/native";
+import { ThemedView } from "../../components/ThemedView";
+import { ScrollView, SafeAreaView } from "react-native";
+import { MenuStackParamList } from "../../navigation/MenuStackNavigator"; //TODO
 
-export default function ItemDetailScreen({ route }) {
+export default function ItemDetailScreen({
+  route,
+}: Readonly<{
+  route: RouteProp<MenuStackParamList, "ItemDetailScreen">; //TODO this was changed from rootstack why?
+}>) {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { item }: { item: Item } = route.params;
@@ -21,12 +29,11 @@ export default function ItemDetailScreen({ route }) {
           topping_id: number;
           toppings: { id: number; name: string; price?: number };
         }[]
-      >("toppingFetch", {
+      >("menu_item_toppings", {
         itemId: item.id.toString(),
       });
 
-      console.log("Raw toppings data:", data);
-
+      if (!data) return;
       if (data) {
         console.log("Raw toppings data:", data);
 
@@ -34,7 +41,7 @@ export default function ItemDetailScreen({ route }) {
           id: d.toppings.id,
           name: d.toppings.name,
           price: d.toppings.price,
-          selected: true,
+          selected: false,
           default: true,
         }));
 
@@ -48,7 +55,7 @@ export default function ItemDetailScreen({ route }) {
   const onSelectTopping = (topping: Topping) => {
     setItemWithToppings((prev) => ({
       ...prev,
-      toppings: prev.toppings.map((t) =>
+      toppings: prev.toppings?.map((t) =>
         t.id === topping.id ? { ...t, selected: !t.selected } : t
       ),
     }));
@@ -67,12 +74,19 @@ export default function ItemDetailScreen({ route }) {
       routes: [{ name: "Menu" }],
     });
   };
+
   return (
-    <ItemDetailCard
-      item={itemWithToppings}
-      quantity={1}
-      onAddToCart={onAddToCart}
-      onSelectTopping={onSelectTopping} //{(t) => console.log('Selected topping:', t.name)}
-    />
+    <SafeAreaView style={{ flex: 1 }}>
+      <ThemedView style={{ flex: 1 }}>
+        <ScrollView>
+          <ItemDetailCard
+            item={itemWithToppings}
+            quantity={1}
+            onAddToCart={onAddToCart}
+            onSelectTopping={onSelectTopping}
+          />
+        </ScrollView>
+      </ThemedView>
+    </SafeAreaView>
   );
 }

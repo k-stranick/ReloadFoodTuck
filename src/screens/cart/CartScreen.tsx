@@ -1,32 +1,3 @@
-// import React from "react";
-// import { View, Text, StyleSheet } from "react-native";
-
-// const CartScreen = () => {
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Cart Screen</Text>
-//       <Text>Your cart is currently empty.</Text>
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: "#fff",
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: "bold",
-//     marginBottom: 10,
-//   },
-// });
-
-// export default CartScreen;
-
-import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 // import { CartItem } from "../../types/interfaces/products/Product.types";
@@ -45,7 +16,7 @@ export default function CartScreen() {
   const handleClearCart = () => {
     dispatch(clearCart());
   };
-
+  //TODO NEED TO WORK ON WIDTH IT WILL NOT WRAP THUS GETS CUT OFF
   return (
     <View style={styles.container}>
       <Text style={styles.header}>🛒 Your Cart</Text>
@@ -57,15 +28,17 @@ export default function CartScreen() {
           <FlatList
             data={cartItems}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
+            renderItem={(
+              { item } //TODO: fix this type error
+            ) => (
               <View style={styles.itemRow}>
                 <Text style={styles.itemText}>
                   {item.name} x {item.quantity}
                 </Text>
 
-                {item.excludedToppings?.length > 0 && (
+                {(item.excludedToppings ?? []).length > 0 && (
                   <Text>
-                    No: {item.excludedToppings.map((t) => t.name).join(", ")}
+                    No: {item.excludedToppings?.map((t) => t.name).join(", ")}
                   </Text>
                 )}
 

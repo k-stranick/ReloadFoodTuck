@@ -5,7 +5,7 @@ import HomeScreen from "../screens/home/HomeScreen";
 import CartScreen from "../screens/cart/CartScreen";
 import LoginScreen from "../screens/login/LoginScreen";
 import MenuScreen from "../screens/menu/MenuScreen";
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, ViewStyle, TouchableOpacity, Text } from "react-native";
 import MenuStackNavigator from "./MenuStackNavigator";
 
 const Drawer = createDrawerNavigator();
@@ -35,7 +35,21 @@ export default function DrawerNavigator() {
       <Drawer.Screen
         name="Cart"
         component={CartScreen}
-        options={{ title: "Cart" }}
+        options={({ navigation }) => ({
+          title: "Cart",
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Menu")}
+              style={{ marginRight: 12 }} // ensures it's not cut off
+            >
+              <Text
+                style={{ color: "#007bff", fontSize: 16, fontWeight: "500" }}
+              >
+                Menu
+              </Text>
+            </TouchableOpacity>
+          ),
+        })}
       />
 
       {/* <Drawer.Screen

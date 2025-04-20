@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
+import { ThemedView } from "./src/components/ThemedView";
 export default function App() {
   return (
     // <View style={styles.container}>
