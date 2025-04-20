@@ -22,31 +22,68 @@ export default function ItemDetailScreen({
   const { item }: { item: Item } = route.params;
   const [itemWithToppings, setItemWithToppings] = useState(item);
 
+  // useEffect(() => {
+  //   const fetchToppings = async () => {
+  //     const data = await universalFetch<
+  //       {
+  //         topping_id: number;
+  //         toppings: { id: number; name: string; price?: number, category?: string }; //TODO remove price here? i am not pulling from backend
+  //       }[]
+  //     >("menu_item_toppings", {
+  //       itemId: item.id.toString(),
+  //     });
+
+  //     if (!data) return;
+  //     if (data) {
+  //       console.log("Raw toppings data:", data);
+
+  //       const toppings = data.map((d) => ({
+  //         id: d.toppings.id,
+  //         name: d.toppings.name,
+  //         // price: d.toppings.price,
+  //         category: d.toppings.category,
+  //         selected: false,
+  //         default: true,
+  //       }));
+
+  //       setItemWithToppings({ ...item, toppings });
+  //     }
+  //   };
+
+  //   fetchToppings();
+  // }, [item]);
+
   useEffect(() => {
+    const sauceOnlyNames = ["Wings", "Tenders"];
+    const isSauceOnly = sauceOnlyNames.includes(item.name);
+    const params: Record<string, string> = { itemId: item.id.toString() };
+    if (isSauceOnly) params.category = "sauce";
+
     const fetchToppings = async () => {
       const data = await universalFetch<
-        {
-          topping_id: number;
-          toppings: { id: number; name: string; price?: number };
-        }[]
-      >("menu_item_toppings", {
-        itemId: item.id.toString(),
-      });
+        // union of both possible shapes
+        Record<string, Topping[]> | { sauce: Topping[] }
+      >("menu_item_toppings", params);
 
       if (!data) return;
-      if (data) {
-        console.log("Raw toppings data:", data);
 
-        const toppings = data.map((d) => ({
-          id: d.toppings.id,
-          name: d.toppings.name,
-          price: d.toppings.price,
-          selected: false,
-          default: true,
-        }));
-
-        setItemWithToppings({ ...item, toppings });
+      let rawList: Topping[];
+      if (isSauceOnly) {
+        // we *know* we asked for category=sauce
+        rawList = (data as { sauce: Topping[] }).sauce;
+      } else {
+        // flatten every category returned
+        rawList = Object.values(data as Record<string, Topping[]>).flat();
       }
+
+      // finally normalize flags
+      const normalized = rawList.map((t) => ({
+        ...t,
+        selected: false,
+        default: true,
+      }));
+
+      setItemWithToppings({ ...item, toppings: normalized });
     };
 
     fetchToppings();

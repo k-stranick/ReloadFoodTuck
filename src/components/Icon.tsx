@@ -30,7 +30,7 @@ type IconProps = {
 export const Icon = ({
   name,
   size = 24,
-  color = Color.NAV_ICON_INACTIVE,
+  color = "#999999", // Color.NAV_ICON_INACTIVE,
   style,
 }: IconProps) => {
   return <Ionicons name={name} size={size} color={color} style={style} />;

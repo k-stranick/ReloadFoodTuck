@@ -7,7 +7,6 @@ export interface Item {
     readonly img_url: string;
     readonly description?: string; // Optional property for description
     toppings?: Topping[];
-    excludedToppings?: Topping[];
 }
 
 export interface Topping {
@@ -34,5 +33,7 @@ export interface ItemCardProps {
 
 export interface CartItem extends Item {
     quantity: number; // Quantity of the item in the cart
-    selectedToppings?: Topping[];
+    addedToppings?: Topping[];
+    excludedToppings?: Topping[];
+    modKey?: string;                // unique key for this item+mod combo
 }
