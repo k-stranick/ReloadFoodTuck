@@ -9,12 +9,12 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { RouteProp } from "@react-navigation/native";
 import { ThemedView } from "../../components/ThemedView";
 import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
-import { MenuStackParamList } from "../../navigation/MenuStackNavigator"; //TODO
+import { MenuStackParamList } from "../../config/types/Navigation.types";
 
 export default function ItemDetailScreen({
   route,
 }: Readonly<{
-  route: RouteProp<MenuStackParamList, "ItemDetailScreen">; //TODO this was changed from rootstack why?
+  route: RouteProp<MenuStackParamList, "ItemDetailScreen">;
 }>) {
   const { item } = route.params as { item: Item };
   const dispatch = useAppDispatch();
@@ -122,6 +122,7 @@ export default function ItemDetailScreen({
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   centeredCard: {
     alignSelf: "center",

@@ -50,7 +50,7 @@ export default function DrawerNavigator() {
         options={({ navigation }) => ({
           title: "Menu",
           headerRight: () => (
-            <CartIconWithBadge onPress={() => navigation.jumpTo("Cart")} /> //.jumpTo fixes the navigation stacking issue
+            <CartIconWithBadge onPress={() => navigation.jumpTo("Cart")} />
           ),
         })}
       />

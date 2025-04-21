@@ -1,12 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MenuScreen from "../screens/menu/MenuScreen";
 import ItemDetailScreen from "../screens/item-detail/ItemDetailScreen";
-import { Item } from "../config/types/Product.types";
-
-export type MenuStackParamList = {
-  MenuScreen: undefined;
-  ItemDetailScreen: { item: Item };
-};
+import { MenuStackParamList } from "../config/types/Navigation.types";
 
 const Stack = createNativeStackNavigator<MenuStackParamList>();
 
