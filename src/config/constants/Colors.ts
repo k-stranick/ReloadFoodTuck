@@ -17,4 +17,5 @@ export const Color = {
   BOX_OUTLINE: 'rgba(119, 49, 8, 0.77)',
   BRIGHT_ORANGE: 'rgba(252, 114, 34, 0.77)',
   HEADER: 'rgb(97, 97, 97)',
+  LIGHT_GOLD: 'rgba(235, 153, 105, 0.8)'
 };

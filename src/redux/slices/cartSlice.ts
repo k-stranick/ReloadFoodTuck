@@ -10,6 +10,7 @@ import {
 interface AddToCartPayload {
     item: Item;
     toppings: Topping[];
+    quantity: number;
 }
 
 const initializeState: CartState = {
@@ -23,8 +24,8 @@ const cartSlice = createSlice({
     initialState: initializeState,
     reducers: {
         addToCart: (state, action: PayloadAction<AddToCartPayload>) => {
-            const { item, toppings } = action.payload;
-            addItemToCart(state, item, toppings);
+            const { item, toppings, quantity } = action.payload;
+            addItemToCart(state, item, toppings, quantity);
         },
         removeFromCart: (state, action: PayloadAction<number>) => {
             const itemId = action.payload;

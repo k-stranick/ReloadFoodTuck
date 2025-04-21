@@ -1,4 +1,4 @@
-
+import { StyleProp, ViewStyle } from 'react-native';
 export interface Item {
     readonly id: number;
     readonly name: string;
@@ -23,8 +23,10 @@ export interface ItemDetailCardProps {
     onAddToCart: () => void; // Function to handle adding the item to the cart
     onSelectTopping: (topping: Topping) => void; // Function to handle selecting a topping
     quantity: number; // Quantity of the item in the cart
+    onQuantityChange: (qty: number) => void;
     removeList: Topping[];
     addList: Topping[];
+    style?: StyleProp<ViewStyle>; // Optional style for the card
 }
 
 export interface ItemCardProps {

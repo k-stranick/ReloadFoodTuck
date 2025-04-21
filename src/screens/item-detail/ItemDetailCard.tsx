@@ -3,13 +3,13 @@ import {
   View,
   TouchableOpacity,
   Text,
-  StyleSheet,
   Pressable,
 } from "react-native";
 import { ItemDetailCardProps, Topping } from "../../config/types/Product.types";
 import { Card } from "../../components/Card";
 import { ThemedText } from "../../components/ThemedText";
 import { Color } from "../../config/constants/Colors";
+import { styles } from "./ItemDetail.styles";
 
 export const ItemDetailCard = ({
   removeList,
@@ -18,6 +18,7 @@ export const ItemDetailCard = ({
   onAddToCart,
   onSelectTopping,
   quantity,
+  onQuantityChange,
 }: ItemDetailCardProps) => {
   const renderTopping = ({ item: topping }: { item: Topping }) => (
     <TouchableOpacity
@@ -78,64 +79,42 @@ export const ItemDetailCard = ({
 
       {/* Quantity & Add to Cart */}
       <View style={styles.actionRow}>
-        <Text style={styles.quantityText}>Quantity: {quantity}</Text>
+        <View style={styles.quantityRow}>
+          <Pressable
+            onPress={() => onQuantityChange(Math.max(1, quantity - 1))}
+            style={({ pressed }) => [
+              styles.qtyButton,
+              pressed && styles.qtyButtonPressed,
+            ]}
+          >
+            <Text style={styles.qtyButtonText}>–</Text>
+          </Pressable>
+
+          <View style={styles.qtyDisplay}>
+            <Text style={styles.qtyDisplayText}>{quantity}</Text>
+          </View>
+
+          <Pressable
+            onPress={() => onQuantityChange(quantity + 1)}
+            style={({ pressed }) => [
+              styles.qtyButton,
+              pressed && styles.qtyButtonPressed,
+            ]}
+          >
+            <Text style={styles.qtyButtonText}>+</Text>
+          </Pressable>
+        </View>
+
         <Pressable
           onPress={onAddToCart}
-          style={({ pressed }: { pressed: boolean }) => [
+          style={({ pressed }) => [
             styles.button,
             pressed && styles.buttonPressed,
           ]}
         >
-          <Text style={styles.buttonText}>'Add to Cart'</Text>
+          <Text style={styles.buttonText}>Add to Cart</Text>
         </Pressable>
       </View>
     </Card>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    marginHorizontal: 16,
-  },
-  toppingSection: {
-    marginTop: 12,
-  },
-  toppingLabel: {
-    marginBottom: 6,
-  },
-  toppingItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 6,
-  },
-  toppingIndicator: {
-    width: 20,
-    height: 20,
-    borderWidth: 3,
-    borderRadius: 6,
-    borderColor: Color.BOX_OUTLINE,
-    marginRight: 8,
-  },
-  actionRow: {
-    flexDirection: "row",
-    marginTop: 16,
-    alignItems: "center",
-  },
-  quantityText: {
-    marginRight: 10,
-  },
-  button: {
-    backgroundColor: Color.BUTTON_COLOR2,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 6,
-  },
-  buttonPressed: {
-    backgroundColor: Color.BUTTON_COLOR2_PRESSED,
-  },
-  buttonText: {
-    color: Color.TEXT,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-});

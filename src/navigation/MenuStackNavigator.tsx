@@ -1,8 +1,7 @@
-// src/navigation/MenuStackNavigator.tsx
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MenuScreen from "../screens/menu/MenuScreen";
 import ItemDetailScreen from "../screens/item-detail/ItemDetailScreen";
-import { Item } from "../config/types/Product.types"; // Adjust the import path as necessary
+import { Item } from "../config/types/Product.types";
 
 export type MenuStackParamList = {
   MenuScreen: undefined;
@@ -14,16 +13,26 @@ const Stack = createNativeStackNavigator<MenuStackParamList>();
 export default function MenuStackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="MenuScreen"
-        component={MenuScreen}
-        // options={{ title: "Menu" }}
-      />
-      <Stack.Screen
-        name="ItemDetailScreen"
-        component={ItemDetailScreen}
-        // options={{ title: "Item Detail" }}
-      />
+      <Stack.Screen name="MenuScreen" component={MenuScreen} />
+
+      <Stack.Group
+        screenOptions={{
+          presentation: "transparentModal", // makes background transparent
+          gestureEnabled: true, // allows swipe down to dismiss
+          contentStyle: {
+            // fade the background
+            backgroundColor: "rgba(0,0,0,0.5)",
+          },
+        }}
+      >
+        <Stack.Screen
+          name="ItemDetailScreen"
+          component={ItemDetailScreen}
+          options={{
+            animation: "slide_from_bottom",
+          }}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }

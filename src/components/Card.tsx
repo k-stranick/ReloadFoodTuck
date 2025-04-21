@@ -86,15 +86,11 @@ export const Card = ({
 
 const styles = StyleSheet.create({
   card: {
-    // overflow: "hidden",
     borderRadius: 16,
     maxWidth: 380,
     backgroundColor: Color.CARD,
-    // borderColor: Color.BORDER,
-    // borderWidth: 4,
     // Android shadow
     elevation: 5,
-
     // iOS shadow
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },

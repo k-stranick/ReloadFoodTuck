@@ -1,6 +1,8 @@
-import { View, StyleSheet, ImageBackground, Pressable } from "react-native";
+import { View, ImageBackground, Pressable } from "react-native";
 import { ThemedText } from "../../components/ThemedText";
+import { styles } from "./HomeScreen.style";
 
+//ADD SAFEAREAVIEW
 const HomeScreen = ({ navigation }: any) => {
   return (
     <ImageBackground
@@ -16,14 +18,9 @@ const HomeScreen = ({ navigation }: any) => {
         </ThemedText>
         <Pressable
           onPress={() => navigation.navigate("Cart")}
-          style={{
-            backgroundColor: "#FF6347",
-            padding: 10,
-            borderRadius: 5,
-            marginTop: 20,
-          }}
+          style={styles.orderButton}
         >
-          <ThemedText type="default" style={{ fontSize: 18 }}>
+          <ThemedText type="defaultSemiBold" style={{ fontWeight: 800 }}>
             Create Order
           </ThemedText>
         </Pressable>
@@ -31,18 +28,5 @@ const HomeScreen = ({ navigation }: any) => {
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
-  },
-  background: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default HomeScreen;

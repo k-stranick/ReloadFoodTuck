@@ -4,8 +4,7 @@ import { Icon } from "../components/Icon";
 import HomeScreen from "../screens/home/HomeScreen";
 import CartScreen from "../screens/cart/CartScreen";
 import LoginScreen from "../screens/login/LoginScreen";
-import MenuScreen from "../screens/menu/MenuScreen";
-import { StyleProp, ViewStyle, TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import MenuStackNavigator from "./MenuStackNavigator";
 import CartIconWithBadge from "./CartIconWithBadge";
 
@@ -30,8 +29,6 @@ export default function DrawerNavigator() {
         },
         drawerStyle: {
           backgroundColor: Color.BACKGROUND,
-
-          // width: 240,
         },
       }}
     >
@@ -66,11 +63,11 @@ export default function DrawerNavigator() {
               onPress={() => navigation.navigate("Menu")}
               style={{ marginRight: 12 }} // ensures it's not cut off
             >
-              <Text
-                style={{ color: "#007bff", fontSize: 16, fontWeight: "500" }}
-              >
-                Menu
-              </Text>
+              <Icon
+                name="restaurant"
+                style={{ margin: 12 }}
+                color={Color.BRIGHT_ORANGE}
+              />
             </TouchableOpacity>
           ),
         })}

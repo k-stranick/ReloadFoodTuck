@@ -14,7 +14,8 @@ function alphabetical(a: string, b: string): number {
 export function addItemToCart(
   state: CartState,
   item: Item,
-  toppings: Topping[] = []
+  toppings: Topping[] = [],
+  quantityToAdd: number = 1
 ) {
   // defaults turned ON → removed
   const excludedToppings = toppings.filter(t => t.default && t.selected);
@@ -33,14 +34,14 @@ export function addItemToCart(
   );
 
   if (existing) {
-    existing.quantity += 1;
+    existing.quantity += quantityToAdd;
   } else {
     const basePrice = item.base_price ?? 0;
     const extrasTotal = addedToppings.reduce((sum, t) => sum + (t.price ?? 0), 0);
 
     const newLine: CartItem = {
       ...item,
-      quantity: 1,
+      quantity: quantityToAdd,
       excludedToppings,
       addedToppings,
       modKey: key,
