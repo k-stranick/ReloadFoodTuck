@@ -18,7 +18,19 @@
 
 export const apiConfig = {
     foodMenuQuick: {
-        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/",
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/menu-items",
+        method: "GET",
+    },
+    menu_item_toppings: {
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/menu_item_toppings",
+        method: "GET",
+    },
+    additionalToppings: {
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/additional_toppings",
+        method: "GET",
+    },
+    sauces: {
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/sauces",
         method: "GET",
     },
     postExample: {

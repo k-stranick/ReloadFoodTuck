@@ -1,51 +1,21 @@
-
 export const Color = {
-  BACKGROUND: '#F3E5AB', //dusty beige
-  THEMED_VIEW_LIGHT: 'rgb(235, 212, 111)', //light yellow-y color
-  THEMED_VIEW: 'rgba(248, 180, 90, 0.8)',
-  COLLAPSE_BACKGROUND: 'rgba(248, 180, 90, 0.8)',
-  NAV_ICON_INACTIVE: 'rgba(247, 163, 54, 0.8)',
-  NAV_ICON_ACTIVE: 'rgb(235, 212, 111)', //light yellow-y color
-  BOTTOM_NAV_BAR: '#3E2F1C',
-  BUTTON_COLOR: 'rgb(235, 212, 111)', //light yellow-y color',
-  RESORT_SELECTOR: 'rgba(248, 180, 90, 0.8)',
-  TEXT: '#3E2F1C', //dark sandstone
+  BACKGROUND: '#2C2C2C', // steel_silver 2C2C2C
+  CARD: '#B0B0B0', //F75C03 #2C2C2C'B0B0B0
+  BUTTON_COLOR: '#F75C03', //orange
+  BUTTON_COLOR2: 'rgba(252, 114, 34, 0.77)', //charcoal rgba(252, 114, 34, 0.77)
+  BUTTON_COLOR2_PRESSED: 'rgba(247, 92, 3, 0.77)',
+  TEXT: '#2C2C2C',
+  TEXT_LIGHT: 'rgba(252, 114, 34, 0.77)',
   LINK: '#2C2C2C', //charcoal
-  BANNER_TITLE: 'rgb(235, 212, 111)',
-  DUSTY_BEIGE: '#F3E5AB',
-  CHARCOAL: '#2C2C2C',
+  BORDER: '#2C2C2C', // Same as Link
+  PRIMARY: 'purple',
+  JET_BLACK: '#0B0B0B',
+  STEEL_SILVER: '#B0B0B0',
+  TOGGLE_UNSELECTED: '#E0E0E0', //
+  TOGGLE_SELECTED: 'rgba(252, 114, 34, 0.77)', // #B0B0B0
+  GUNMETAL_GRAY: '#2C2C2C',
+  BOX_OUTLINE: 'rgba(119, 49, 8, 0.77)',
+  BRIGHT_ORANGE: 'rgba(252, 114, 34, 0.77)',
+  HEADER: 'rgb(97, 97, 97)',
+  LIGHT_GOLD: 'rgba(235, 153, 105, 0.8)'
 };
-
-// constant colors used for light and dark theme for the app
-// const tintColorLight = '#0a7ea4';
-// const tintColorDark = '#fff';
-
-// for light and dark themes add later
-// export const Colors = {
-//     light: {
-//         text: '#11181C',
-//         background: 'rgb(235, 212, 111)',
-//         tint: tintColorLight,
-//         icon: '#687076',
-//         tabIconDefault: '#687076',
-//         tabIconSelected: '#0a7ea4',
-//     },
-//     dark: {
-//         text: '#ECEDEE',
-//         background: '#151718',
-//         tint: tintColorDark,
-//         icon: '#9BA1A6',
-//         tabIconDefault: '#9BA1A6',
-//         tabIconSelected: '#fff',
-//     },
-// };
-
-
-
-
-
-// dark sandstone #3E2F1C
-// desert clay #3E2F1C
-// dusty beige #F3E5AB
-// charcoal #2C2C2C
-// amber gold #C6922D	

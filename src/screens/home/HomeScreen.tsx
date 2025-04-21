@@ -1,30 +1,32 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, ImageBackground, Pressable } from "react-native";
+import { ThemedText } from "../../components/ThemedText";
+import { styles } from "./HomeScreen.style";
 
+//ADD SAFEAREAVIEW
 const HomeScreen = ({ navigation }: any) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Reload Food Truck!</Text>
-      <Button
-        title="Explore Menu"
-        onPress={() => navigation.navigate("MenuScreen")}
-      />
-    </View>
+    <ImageBackground
+      source={{
+        uri: "https://bswenfhypijyumpbwhti.supabase.co/storage/v1/object/public/reload-assets/theTruck.jpg",
+      }}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.container}>
+        <ThemedText type="title" style={{ color: "white" }}>
+          The Reload Food Truck!
+        </ThemedText>
+        <Pressable
+          onPress={() => navigation.navigate("Cart")}
+          style={styles.orderButton}
+        >
+          <ThemedText type="defaultSemiBold" style={{ fontWeight: 800 }}>
+            Create Order
+          </ThemedText>
+        </Pressable>
+      </View>
+    </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f8f8f8",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-});
 
 export default HomeScreen;

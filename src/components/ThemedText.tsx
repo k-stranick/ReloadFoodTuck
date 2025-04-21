@@ -1,10 +1,24 @@
-import { Text, TextProps, StyleSheet } from "react-native";
+import {
+  Text,
+  TextProps,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+} from "react-native";
 import { Color } from "../config/constants/Colors";
 
 type ThemedTextProps = TextProps & {
   // lightColor?: string;
   // darkColor?: string;
-  type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
+  type?:
+    | "default"
+    | "title"
+    | "defaultSemiBold"
+    | "subtitle"
+    | "link"
+    | "checkout";
+  style?: StyleProp<TextStyle>;
+  color?: string;
 };
 
 /**
@@ -30,6 +44,7 @@ type ThemedTextProps = TextProps & {
 export function ThemedText({
   style,
   type = "default",
+  color,
   ...rest
 }: ThemedTextProps) {
   return (
@@ -40,6 +55,8 @@ export function ThemedText({
         type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
         type === "subtitle" ? styles.subtitle : undefined,
         type === "link" ? styles.link : undefined,
+        type === "checkout" ? styles.checkout : undefined,
+        color && { color }, // override style color if `color` is passed
         style,
       ]}
       {...rest}
@@ -63,16 +80,23 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     lineHeight: 32,
-    color: Color.TEXT,
+    color: Color.TEXT_LIGHT,
   },
   subtitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 400,
+    fontStyle: "italic",
     color: Color.TEXT,
   },
   link: {
     lineHeight: 30,
     fontSize: 16,
     color: Color.LINK,
+  },
+  checkout: {
+    fontSize: 26,
+    fontWeight: "bold",
+    lineHeight: 32,
+    color: Color.TEXT,
   },
 });

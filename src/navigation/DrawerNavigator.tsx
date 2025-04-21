@@ -4,16 +4,34 @@ import { Icon } from "../components/Icon";
 import HomeScreen from "../screens/home/HomeScreen";
 import CartScreen from "../screens/cart/CartScreen";
 import LoginScreen from "../screens/login/LoginScreen";
-import MenuScreen from "../screens/menu/MenuScreen";
-import { StyleProp, ViewStyle } from "react-native";
+import { TouchableOpacity } from "react-native";
+import MenuStackNavigator from "./MenuStackNavigator";
+import CartIconWithBadge from "./CartIconWithBadge";
+import { DrawerParamList } from "../config/types/Navigation.types";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerParamList>();
 
 export default function DrawerNavigator() {
   return (
     <Drawer.Navigator
-      screenOptions={{ headerTitleAlign: "center" }}
       initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Color.HEADER,
+        },
+        headerTitleAlign: "center",
+        headerTintColor: Color.BRIGHT_ORANGE,
+        drawerInactiveTintColor: Color.STEEL_SILVER,
+        drawerActiveTintColor: Color.BRIGHT_ORANGE,
+        drawerItemStyle: { marginVertical: 5 },
+        drawerLabelStyle: {
+          fontSize: 16,
+          fontWeight: "500",
+        },
+        drawerStyle: {
+          backgroundColor: Color.BACKGROUND,
+        },
+      }}
     >
       <Drawer.Screen
         name="Login"
@@ -27,14 +45,33 @@ export default function DrawerNavigator() {
         options={{ title: "Home" }}
       />
       <Drawer.Screen
-        name="Food"
-        component={MenuScreen}
-        options={{ title: "Menu" }}
+        name="Menu"
+        component={MenuStackNavigator}
+        options={({ navigation }) => ({
+          title: "Menu",
+          headerRight: () => (
+            <CartIconWithBadge onPress={() => navigation.jumpTo("Cart")} /> //.jumpTo fixes the navigation stacking issue
+          ),
+        })}
       />
       <Drawer.Screen
         name="Cart"
         component={CartScreen}
-        options={{ title: "Cart" }}
+        options={({ navigation }) => ({
+          title: "Cart",
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.jumpTo("Menu")}
+              style={{ marginRight: 12 }} // ensures it's not cut off
+            >
+              <Icon
+                name="restaurant"
+                style={{ margin: 12 }}
+                color={Color.BRIGHT_ORANGE}
+              />
+            </TouchableOpacity>
+          ),
+        })}
       />
 
       {/* <Drawer.Screen

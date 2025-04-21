@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
+import { Image, StyleSheet, StyleProp, ViewStyle, View } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { Color } from "../config/constants/Colors";
@@ -15,7 +9,7 @@ type CardProps = {
   subtitle?: string;
   image?: string;
   children?: React.ReactNode;
-  onPress?: () => void;
+  // onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   padding?: number;
   margin?: number;
@@ -26,6 +20,7 @@ type CardProps = {
     | "defaultSemiBold"
     | "subtitle"
     | "link";
+  textColor?: string;
 };
 
 /**
@@ -61,37 +56,46 @@ export const Card = ({
   subtitle,
   image,
   children,
-  onPress,
+  // onPress,
   style,
   padding = 16,
   margin = 12,
   titleTextType = "default",
   subtitleTextType = "subtitle",
-}: CardProps) => {
+  textColor,
+}: CardProps): JSX.Element => {
   const content = (
     <ThemedView style={[styles.card, { padding, margin }, style]}>
       {image && <Image source={{ uri: image }} style={styles.image} />}
-      {title && <ThemedText type={titleTextType}>{title}</ThemedText>}
-      {subtitle && <ThemedText type={subtitleTextType}>{subtitle}</ThemedText>}
+      {title && (
+        <ThemedText color={textColor} type={titleTextType}>
+          {title}
+        </ThemedText>
+      )}
+      {subtitle && (
+        <ThemedText color={textColor} type={subtitleTextType}>
+          {subtitle}
+        </ThemedText>
+      )}
       {children}
     </ThemedView>
   );
 
-  return onPress ? (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      {content}
-    </TouchableOpacity>
-  ) : (
-    content
-  );
+  return <View>{content}</View>;
 };
 
 const styles = StyleSheet.create({
   card: {
-    overflow: "hidden",
     borderRadius: 16,
     maxWidth: 380,
-    backgroundColor: Color.DUSTY_BEIGE,
+    backgroundColor: Color.CARD,
+    // Android shadow
+    elevation: 5,
+    // iOS shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
   },
   image: {
     width: "100%",
@@ -99,14 +103,4 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 12,
   },
-  // title: {
-  //   // textAlign: "center",
-  //   fontSize: 1,
-  // },
-  // subtitle: {
-  //   marginBottom: 8,
-  //   fontSize: 14,
-  //   textAlign: "center",
-  //   fontStyle: "italic",
-  // },
 });

@@ -1,5 +1,5 @@
 import { useWindowDimensions } from "react-native";
-import { UseResponsiveColumnsOptions } from "../config/types/useResponsiveColumns.types";
+import { UseResponsiveColumnsOptions } from "../config/types/ResponsiveColumns.types";
 
 export function useResponsiveColumns(options: UseResponsiveColumnsOptions) {
     const { minWidth = 200, minColumns = 1, maxColumns = 4 } =

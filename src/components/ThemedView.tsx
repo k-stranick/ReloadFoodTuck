@@ -1,5 +1,6 @@
 import { View, ViewProps, StyleSheet } from "react-native";
 import { Color } from "../config/constants/Colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 type ThemedViewProps = ViewProps & {
   // lightColor?: string;
@@ -40,7 +41,7 @@ export function ThemedView({
     <View
       style={[
         styles.base,
-        { backgroundColor: backgroundColor ?? Color.THEMED_VIEW }, //pass color or use default color
+        { backgroundColor: backgroundColor ?? Color.BACKGROUND }, //pass color or use default color
         style,
       ]}
       {...otherProps}
@@ -50,7 +51,7 @@ export function ThemedView({
 
 const styles = StyleSheet.create({
   base: {
-    borderTopLeftRadius: 16,
-    overflow: "hidden", // ensures content respects the border radius
+    flex: 1,
+    // overflow: "hidden", // ensures content respects the border radius
   },
 });
