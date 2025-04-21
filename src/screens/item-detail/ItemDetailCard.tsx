@@ -73,7 +73,6 @@ export const ItemDetailCard = ({
             keyExtractor={(t) => t.id.toString()}
             renderItem={renderTopping}
           />
-          )
         </View>
       )}
 

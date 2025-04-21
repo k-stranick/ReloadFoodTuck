@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, View, ViewStyle, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useAppSelector } from "../hooks/reduxHooks";
+import { useAppSelector } from "../hooks/useRedux";
 import { Color } from "../config/constants/Colors";
 type Props = {
   onPress: () => void;

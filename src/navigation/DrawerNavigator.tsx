@@ -7,8 +7,9 @@ import LoginScreen from "../screens/login/LoginScreen";
 import { TouchableOpacity } from "react-native";
 import MenuStackNavigator from "./MenuStackNavigator";
 import CartIconWithBadge from "./CartIconWithBadge";
+import { DrawerParamList } from "../config/types/Navigation.types";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerParamList>();
 
 export default function DrawerNavigator() {
   return (
@@ -49,7 +50,7 @@ export default function DrawerNavigator() {
         options={({ navigation }) => ({
           title: "Menu",
           headerRight: () => (
-            <CartIconWithBadge onPress={() => navigation.navigate("Cart")} />
+            <CartIconWithBadge onPress={() => navigation.jumpTo("Cart")} /> //.jumpTo fixes the navigation stacking issue
           ),
         })}
       />
@@ -60,7 +61,7 @@ export default function DrawerNavigator() {
           title: "Cart",
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("Menu")}
+              onPress={() => navigation.jumpTo("Menu")}
               style={{ marginRight: 12 }} // ensures it's not cut off
             >
               <Icon

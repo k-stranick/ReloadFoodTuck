@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/useRedux";
 import { CartItem } from "../../config/types/Product.types";
 import { removeFromCart, clearCart } from "../../redux/slices/cartSlice";
 import { styles } from "./CartScreen.styles";

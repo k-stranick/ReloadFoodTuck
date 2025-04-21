@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ItemDetailCard } from "./ItemDetailCard";
 import { universalFetch } from "../../services/fetchApi";
 import { Item, Topping } from "../../config/types/Product.types";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch } from "../../hooks/useRedux";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
