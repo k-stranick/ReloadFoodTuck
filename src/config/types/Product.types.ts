@@ -10,6 +10,7 @@ export interface Item {
 }
 
 export interface Topping {
+    joinId?: number // uniqueIdentifier for the join table used in removing toppings 
     id: number; // Unique identifier for the topping
     name: string; // Name of the topping
     price?: number; // Price of the topping
@@ -22,6 +23,8 @@ export interface ItemDetailCardProps {
     onAddToCart: () => void; // Function to handle adding the item to the cart
     onSelectTopping: (topping: Topping) => void; // Function to handle selecting a topping
     quantity: number; // Quantity of the item in the cart
+    removeList: Topping[];
+    addList: Topping[];
 }
 
 export interface ItemCardProps {
@@ -33,7 +36,7 @@ export interface ItemCardProps {
 
 export interface CartItem extends Item {
     quantity: number; // Quantity of the item in the cart
-    addedToppings?: Topping[];
-    excludedToppings?: Topping[];
+    addedToppings: Topping[];
+    excludedToppings: Topping[];
     modKey?: string;                // unique key for this item+mod combo
 }

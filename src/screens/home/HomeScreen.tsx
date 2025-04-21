@@ -1,7 +1,6 @@
 import { View, StyleSheet, ImageBackground, Pressable } from "react-native";
 import { ThemedText } from "../../components/ThemedText";
 
-//ADD SAFEAREAVIEW
 const HomeScreen = ({ navigation }: any) => {
   return (
     <ImageBackground

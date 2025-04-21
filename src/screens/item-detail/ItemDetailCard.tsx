@@ -12,6 +12,8 @@ import { ThemedText } from "../../components/ThemedText";
 import { Color } from "../../config/constants/Colors";
 
 export const ItemDetailCard = ({
+  removeList,
+  addList,
   item,
   onAddToCart,
   onSelectTopping,
@@ -33,7 +35,10 @@ export const ItemDetailCard = ({
         ]}
       />
       <ThemedText>
-        {topping.name} {topping.price ? `($${topping.price.toFixed(2)})` : ""}
+        {topping.name}
+        {!topping.default && topping.price
+          ? ` ($${topping.price.toFixed(2)})`
+          : ""}
       </ThemedText>
     </TouchableOpacity>
   );
@@ -47,15 +52,29 @@ export const ItemDetailCard = ({
     >
       <ThemedText type="subtitle">{item.description}</ThemedText>
 
-      {/* Toppings */}
-      <View style={styles.toppingSection}>
-        <ThemedText style={styles.toppingLabel}>Remove Toppings:</ThemedText>
-        <FlatList
-          data={item.toppings}
-          keyExtractor={(topping) => topping.id.toString()}
-          renderItem={renderTopping}
-        />
-      </View>
+      {/* Toppings Section */}
+      {removeList.length > 0 && (
+        <View style={styles.toppingSection}>
+          <ThemedText style={styles.toppingLabel}>Remove</ThemedText>
+          <FlatList
+            data={removeList}
+            keyExtractor={(t) => t.joinId!.toString()}
+            renderItem={renderTopping}
+          />
+        </View>
+      )}
+
+      {addList.length > 0 && (
+        <View style={styles.toppingSection}>
+          <ThemedText style={styles.toppingLabel}>Add</ThemedText>
+          <FlatList
+            data={addList}
+            keyExtractor={(t) => t.id.toString()}
+            renderItem={renderTopping}
+          />
+          )
+        </View>
+      )}
 
       {/* Quantity & Add to Cart */}
       <View style={styles.actionRow}>
@@ -67,7 +86,7 @@ export const ItemDetailCard = ({
             pressed && styles.buttonPressed,
           ]}
         >
-          <Text style={styles.buttonText}>Add to Cart</Text>
+          <Text style={styles.buttonText}>'Add to Cart'</Text>
         </Pressable>
       </View>
     </Card>

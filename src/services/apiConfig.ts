@@ -29,11 +29,10 @@ export const apiConfig = {
         url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/additional_toppings",
         method: "GET",
     },
-    // itemToppingsCombined: {
-    //     url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/item_toppings_combined",
-    //     method: "GET",
-    //   },
-
+    sauces: {
+        url: "https://snowy-morning-71c7.kyle-stranickschool.workers.dev/api/sauces",
+        method: "GET",
+    },
     postExample: {
         url: "https://api.example.com/post",
         method: "POST",

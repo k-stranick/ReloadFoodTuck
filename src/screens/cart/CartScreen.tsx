@@ -56,7 +56,7 @@ export default function CartScreen() {
           <>
             <FlatList<CartItem>
               data={cartItems}
-              keyExtractor={(item) => item.id.toString()}
+              keyExtractor={(ci) => ci.modKey ?? ci.id.toString()}
               renderItem={({ item }) => {
                 const priceEach = item.base_price ?? 0;
                 const totalItemPrice = priceEach * item.quantity;
@@ -80,29 +80,23 @@ export default function CartScreen() {
                         {item.name} x {item.quantity}
                       </ThemedText>
 
-                      {(item.excludedToppings ?? []).length > 0 && (
+                      {/* “No:” = excludedToppings */}
+                      {(item.excludedToppings.length ?? 0) > 0 && (
                         <Text style={styles.mods}>
                           No:{" "}
-                          {item.excludedToppings?.map((t) => t.name).join(", ")}
+                          {item.excludedToppings.map((t) => t.name).join(", ")}
                         </Text>
                       )}
-                      {/* 
-                    {item.selectedToppings?.filter((t) => !t.default).length >
-                      0 && (
-                      <Text style={styles.mods}>
-                        Add:{" "}
-                        {item.selectedToppings
-                          .filter((t) => !t.default)
-                          .map(
-                            (t) =>
-                              `${t.name}${
-                                t.price ? ` (+$${t.price.toFixed(2)})` : ""
-                              }`
-                          )
-                          .join(", ")}
-                      </Text>
-                    )} */}
+
+                      {/* “Add:” = addedToppings */}
+                      {(item.addedToppings.length ?? 0) > 0 && (
+                        <Text style={styles.mods}>
+                          Add:{" "}
+                          {item.addedToppings.map((t) => t.name).join(", ")}
+                        </Text>
+                      )}
                     </View>
+
                     {/* Price Column */}
                     <View style={styles.priceColumn}>
                       <ThemedText
