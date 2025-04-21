@@ -7,6 +7,10 @@ export function recalcCart(state: CartState) {
   state.totalPrice = state.cartItems.reduce((sum, ci) => sum + ci.base_price * ci.quantity, 0);
 }
 
+function alphabetical(a: string, b: string): number {
+  return a.localeCompare(b);
+}
+
 export function addItemToCart(
   state: CartState,
   item: Item,
@@ -21,7 +25,7 @@ export function addItemToCart(
   const key = [
     ...excludedToppings.map(t => `no-${t.id}`),
     ...addedToppings.map(t => `add-${t.id}`),
-  ].sort().join('_');
+  ].sort(alphabetical).join('_');
 
   const existing = state.cartItems.find(ci =>
     ci.id === item.id &&
@@ -32,7 +36,7 @@ export function addItemToCart(
     existing.quantity += 1;
   } else {
     const basePrice = item.base_price ?? 0;
-    const extrasTotal = addedToppings.reduce((sum, t) => sum + (t.price || 0), 0);
+    const extrasTotal = addedToppings.reduce((sum, t) => sum + (t.price ?? 0), 0);
 
     const newLine: CartItem = {
       ...item,
