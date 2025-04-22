@@ -23,10 +23,12 @@ export interface ItemDetailCardProps {
     onAddToCart: () => void; // Function to handle adding the item to the cart
     onSelectTopping: (topping: Topping) => void; // Function to handle selecting a topping
     quantity: number; // Quantity of the item in the cart
-    onQuantityChange: (qty: number) => void;
+    // onQuantityChange: (qty: number) => void;
     removeList: Topping[];
     addList: Topping[];
     style?: StyleProp<ViewStyle>; // Optional style for the card
+    increment?: () => void; // Optional function to increment the quantity
+    decrement?: () => void; // Optional function to decrement the quantity
 }
 
 export interface ItemCardProps {

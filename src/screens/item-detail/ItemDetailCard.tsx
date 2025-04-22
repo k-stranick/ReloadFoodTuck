@@ -18,8 +18,10 @@ export const ItemDetailCard = ({
   onAddToCart,
   onSelectTopping,
   quantity,
-  onQuantityChange,
-}: ItemDetailCardProps) => {
+  increment,
+  decrement,
+}: // onQuantityChange,
+ItemDetailCardProps) => {
   const renderTopping = ({ item: topping }: { item: Topping }) => (
     <TouchableOpacity
       onPress={() => onSelectTopping(topping)}
@@ -80,7 +82,8 @@ export const ItemDetailCard = ({
       <View style={styles.actionRow}>
         <View style={styles.quantityRow}>
           <Pressable
-            onPress={() => onQuantityChange(Math.max(1, quantity - 1))}
+            // onPress={() => onQuantityChange(Math.max(1, quantity - 1))}
+            onPress={decrement}
             style={({ pressed }) => [
               styles.qtyButton,
               pressed && styles.qtyButtonPressed,
@@ -94,7 +97,8 @@ export const ItemDetailCard = ({
           </View>
 
           <Pressable
-            onPress={() => onQuantityChange(quantity + 1)}
+            // onPress={() => onQuantityChange(quantity + 1)}
+            onPress={increment}
             style={({ pressed }) => [
               styles.qtyButton,
               pressed && styles.qtyButtonPressed,

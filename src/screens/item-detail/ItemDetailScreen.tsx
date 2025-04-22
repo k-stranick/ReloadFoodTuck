@@ -1,112 +1,51 @@
-import { useEffect, useState } from "react";
-import { ItemDetailCard } from "./ItemDetailCard";
-import { universalFetch } from "../../services/fetchApi";
-import { Item, Topping } from "../../config/types/Product.types";
-import { useAppDispatch } from "../../hooks/useRedux";
-import { addToCart } from "../../redux/slices/cartSlice";
+import { ScrollView, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { RouteProp } from "@react-navigation/native";
-import { ThemedView } from "../../components/ThemedView";
-import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
+import { ItemDetailCard } from "./ItemDetailCard";
+import { Item, Topping } from "../../config/types/Product.types";
 import { MenuStackParamList } from "../../config/types/Navigation.types";
-import { DrawerParamList } from "../../config/types/Navigation.types";
-import type { DrawerNavigationProp } from "@react-navigation/drawer";
+import { useAppDispatch } from "../../hooks/useRedux";
+import { useToppings } from "../../hooks/useToppings";
+import { addToCart } from "../../redux/slices/cartSlice";
+import { ThemedView } from "../../components/ThemedView";
+import { styles } from "./ItemDetail.styles";
+import { handleSelectTopping } from "../../utils/handleToppingSelection";
+import { useQuantity } from "../../hooks/useQuantity";
 
 export default function ItemDetailScreen({
   route,
-}: Readonly<{
-  route: RouteProp<MenuStackParamList, "ItemDetailScreen">;
-}>) {
+}: Readonly<{ route: RouteProp<MenuStackParamList, "ItemDetailScreen"> }>) {
   const { item } = route.params as { item: Item };
   const dispatch = useAppDispatch();
   const stackNav =
     useNavigation<NativeStackNavigationProp<MenuStackParamList>>();
-  const drawerNav = useNavigation<DrawerNavigationProp<DrawerParamList>>();
-
-  const [removeToppings, setRemoveToppings] = useState<Topping[]>([]);
-  const [addToppings, setAddToppings] = useState<Topping[]>([]);
-  const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    const addOnlyIds = [6, 7, 10]; // Wings & Tenders
-    const isAddOnly = addOnlyIds.includes(item.id);
-    const noAddIds = [1, 2, 3, 4, 5]; //fries and mozz sticks
-    const isNoAdds = noAddIds.includes(item.id);
-
-    async function load() {
-      // fetch only the defaults from the join table
-      const defaults =
-        (await universalFetch<Topping[]>("menu_item_toppings", {
-          itemId: item.id.toString(),
-        })) ?? [];
-
-      setRemoveToppings(
-        defaults.map((t) => ({
-          ...t,
-          default: true,
-          selected: false,
-        }))
-      );
-
-      // fetch add‑able options:
-      //   if it’s a sauce‑only item hit /api/sauces
-      //   otherwise hit /api/additional_toppings
-      if (isNoAdds) {
-        setAddToppings([]);
-      } else {
-        const adds =
-          (await universalFetch<Topping[]>(
-            isAddOnly ? "sauces" : "additionalToppings"
-          )) ?? [];
-
-        setAddToppings(
-          adds.map((t) => ({
-            ...t,
-            default: false,
-            selected: false,
-          }))
-        );
-      }
-    }
-    load();
-  }, [item]);
-
-  // toggle by matching on joinId for defaults, on id for extras
-  const onSelectTopping = (t: Topping) => {
-    if (t.default) {
-      setRemoveToppings((rs) =>
-        rs.map((x) =>
-          x.joinId === t.joinId ? { ...x, selected: !x.selected } : x
-        )
-      );
-    } else {
-      setAddToppings((as) =>
-        as.map((x) => (x.id === t.id ? { ...x, selected: !x.selected } : x))
-      );
-    }
+  const { quantity, increment, decrement } = useQuantity(1);
+  const { removeToppings, setRemoveToppings, addToppings, setAddToppings } =
+    useToppings(item);
+  const onSelectTopping = (topping: Topping) => {
+    handleSelectTopping(topping, setRemoveToppings, setAddToppings);
   };
 
   const onAddToCart = () => {
-    dispatch(
-      addToCart({
-        item,
-        toppings: [...removeToppings, ...addToppings],
-        quantity,
-      })
-    );
-    stackNav.goBack();
+    try {
+      dispatch(
+        addToCart({
+          item,
+          toppings: [...removeToppings, ...addToppings],
+          quantity,
+        })
+      );
+      stackNav.goBack();
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={{ flex: 1 }}>
-        <ScrollView
-          contentContainerStyle={{
-            alignItems: "center",
-            paddingVertical: 16,
-          }}
-        >
+    <SafeAreaView style={styles.safeArea}>
+      <ThemedView style={styles.themedView}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <ItemDetailCard
             item={item}
             removeList={removeToppings}
@@ -114,7 +53,8 @@ export default function ItemDetailScreen({
             onSelectTopping={onSelectTopping}
             onAddToCart={onAddToCart}
             quantity={quantity}
-            onQuantityChange={setQuantity}
+            increment={increment}
+            decrement={decrement}
             style={styles.centeredCard}
           />
         </ScrollView>
@@ -122,10 +62,3 @@ export default function ItemDetailScreen({
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  centeredCard: {
-    alignSelf: "center",
-    maxWidth: 700, // 700?
-  },
-});
