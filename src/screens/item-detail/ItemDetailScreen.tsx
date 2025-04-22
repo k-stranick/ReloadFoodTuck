@@ -10,6 +10,8 @@ import type { RouteProp } from "@react-navigation/native";
 import { ThemedView } from "../../components/ThemedView";
 import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import { MenuStackParamList } from "../../config/types/Navigation.types";
+import { DrawerParamList } from "../../config/types/Navigation.types";
+import type { DrawerNavigationProp } from "@react-navigation/drawer";
 
 export default function ItemDetailScreen({
   route,
@@ -18,8 +20,9 @@ export default function ItemDetailScreen({
 }>) {
   const { item } = route.params as { item: Item };
   const dispatch = useAppDispatch();
-  const navigation =
+  const stackNav =
     useNavigation<NativeStackNavigationProp<MenuStackParamList>>();
+  const drawerNav = useNavigation<DrawerNavigationProp<DrawerParamList>>();
 
   const [removeToppings, setRemoveToppings] = useState<Topping[]>([]);
   const [addToppings, setAddToppings] = useState<Topping[]>([]);
@@ -92,10 +95,12 @@ export default function ItemDetailScreen({
         quantity,
       })
     );
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Menu" as keyof MenuStackParamList }],
-    });
+    stackNav.goBack();
+    drawerNav.jumpTo("Menu", { screen: "MenuScreen" });
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: 'Menu' as keyof MenuStackParamList }],
+    // });
   };
 
   return (

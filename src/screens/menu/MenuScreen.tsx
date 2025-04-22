@@ -4,7 +4,7 @@ import { universalFetch } from "../../services/fetchApi";
 import { QuickItemCard } from "./QuickItemCard";
 import { useResponsiveColumns } from "../../hooks/useResponsiveColumns";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { MenuStackParamList } from "../../navigation/MenuStackNavigator";
+import { MenuStackParamList } from "../../config/types/Navigation.types";
 import { Item } from "../../config/types/Product.types"; // Adjust the import path as necessary
 import { ThemedView } from "../../components/ThemedView";
 import { Color } from "../../config/constants/Colors";
