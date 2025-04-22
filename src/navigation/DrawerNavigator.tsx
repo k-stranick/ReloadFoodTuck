@@ -44,16 +44,19 @@ export default function DrawerNavigator() {
         component={HomeScreen}
         options={{ title: "Home" }}
       />
+
       <Drawer.Screen
         name="Menu"
         component={MenuStackNavigator}
         options={({ navigation }) => ({
           title: "Menu",
+          unmountOnBlur: true,
           headerRight: () => (
             <CartIconWithBadge onPress={() => navigation.jumpTo("Cart")} />
           ),
         })}
       />
+
       <Drawer.Screen
         name="Cart"
         component={CartScreen}

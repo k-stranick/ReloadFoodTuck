@@ -10,24 +10,13 @@ export default function MenuStackNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MenuScreen" component={MenuScreen} />
 
-      <Stack.Group
-        screenOptions={{
-          presentation: "transparentModal", // makes background transparent
-          gestureEnabled: true, // allows swipe down to dismiss
-          contentStyle: {
-            // fade the background
-            backgroundColor: "rgba(0,0,0,0.5)",
-          },
+      <Stack.Screen
+        name="ItemDetailScreen"
+        component={ItemDetailScreen}
+        options={{
+          animation: "slide_from_bottom",
         }}
-      >
-        <Stack.Screen
-          name="ItemDetailScreen"
-          component={ItemDetailScreen}
-          options={{
-            animation: "slide_from_bottom",
-          }}
-        />
-      </Stack.Group>
+      />
     </Stack.Navigator>
   );
 }

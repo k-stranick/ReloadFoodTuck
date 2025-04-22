@@ -96,11 +96,6 @@ export default function ItemDetailScreen({
       })
     );
     stackNav.goBack();
-    drawerNav.jumpTo("Menu", { screen: "MenuScreen" });
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{ name: 'Menu' as keyof MenuStackParamList }],
-    // });
   };
 
   return (
