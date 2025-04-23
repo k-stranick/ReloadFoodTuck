@@ -1,9 +1,9 @@
 import { StyleSheet, Pressable } from "react-native";
 import { Card } from "../../components/Card";
-import { ItemCardProps } from "../../config/types/Product.types";
+import { QuickItemCardProps } from "./QuickItemCard.types";
 import { Color } from "../../config/constants/Colors";
 
-export const QuickItemCard = ({ item, onPress }: ItemCardProps) => (
+export const QuickItemCard = ({ item, onPress }: QuickItemCardProps) => (
   <Pressable style={{ flex: 1 }} onPress={onPress}>
     <Card
       image={item.img_url}
