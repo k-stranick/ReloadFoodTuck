@@ -66,10 +66,7 @@ export default function DrawerNavigator() {
             <TouchableOpacity
               onPress={() =>
                 navigation.jumpTo("Menu", { screen: "MenuScreen" })
-              } // <--OLD
-              // onPress={() =>
-              //   navigation.navigate("Menu", { screen: "MenuScreen" })
-              // }
+              }
               accessibilityLabel="Navigate to Menu"
               style={{ marginRight: 12 }} // ensures it's not cut off
             >

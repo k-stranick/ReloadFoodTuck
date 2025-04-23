@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { View, FlatList, ActivityIndicator } from "react-native";
-import { universalFetch } from "../../services/fetchApi";
 import { QuickItemCard } from "./QuickItemCard";
 import { useResponsiveColumns } from "../../hooks/useResponsiveColumns";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -34,7 +32,7 @@ export default function MenuScreen({ navigation }: MenuScreenProps) {
           key={numColumns}
           numColumns={numColumns}
           renderItem={(
-            { item }: { item: Item } //TODO: WHY IS THIS THROWING AN ERROR
+            { item }: { item: Item }
           ) => (
             <QuickItemCard
               item={{

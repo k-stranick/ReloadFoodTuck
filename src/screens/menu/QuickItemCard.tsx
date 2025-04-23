@@ -9,9 +9,7 @@ export const QuickItemCard = ({ item, onPress }: QuickItemCardProps) => (
       image={item.img_url}
       title={item.name}
       subtitle={`$${item.base_price}`}
-      // onPress={onPress}
       style={styles.card} // ensures compatibility with FlatList grids
-      // textColor={Color.GUNMETAL_GRAY}
     />
   </Pressable>
 );
