@@ -18,5 +18,8 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: Color.BRIGHT_ORANGE,
+    minHeight: 318,
+    maxWidth: 220
+
   },
 });
