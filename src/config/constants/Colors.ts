@@ -1,3 +1,6 @@
+/**
+ * Colors used in the app.
+ */
 export const Color = {
   BACKGROUND: '#2C2C2C', // steel_silver 2C2C2C
   CARD: '#B0B0B0', //F75C03 #2C2C2C'B0B0B0

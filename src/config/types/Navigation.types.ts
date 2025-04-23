@@ -3,7 +3,7 @@ import { Item } from './Product.types';
 export type DrawerParamList = {
     Login: undefined;
     Home: undefined;
-    Menu: undefined;
+    Menu: { screen: string };
     Cart: undefined;
 };
 

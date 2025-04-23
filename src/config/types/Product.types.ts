@@ -1,8 +1,6 @@
-import { StyleProp, ViewStyle } from 'react-native';
 export interface Item {
     readonly id: number;
     readonly name: string;
-    // readonly price: number;
     readonly base_price: number; // Optional property for base price
     readonly img_url: string;
     readonly description?: string; // Optional property for description
@@ -18,27 +16,9 @@ export interface Topping {
     default?: boolean; // optional property to indicate if the topping is default
 }
 
-export interface ItemDetailCardProps {
-    item: Item; // The item to be displayed in the card
-    onAddToCart: () => void; // Function to handle adding the item to the cart
-    onSelectTopping: (topping: Topping) => void; // Function to handle selecting a topping
-    quantity: number; // Quantity of the item in the cart
-    onQuantityChange: (qty: number) => void;
-    removeList: Topping[];
-    addList: Topping[];
-    style?: StyleProp<ViewStyle>; // Optional style for the card
-}
-
-export interface ItemCardProps {
-    onPress?: () => void; // Optional onPress function for when the card is pressed
-    readonly item: Item;
-    readonly handlePress?: () => void; // Optional onPress function for when the card is pressed
-    readonly handleButton?: (item: Item) => void; // Optional function to add item to cart with button (need to rename TODO:RENAME)
-}
-
 export interface CartItem extends Item {
     quantity: number; // Quantity of the item in the cart
-    addedToppings: Topping[];
-    excludedToppings: Topping[];
-    modKey?: string;                // unique key for this item+mod combo
+    addedToppings: Topping[]; //Array of toppings added to the item
+    excludedToppings: Topping[]; //Array of toppings removed from the item
+    modKey?: string; // unique key for this item+mod combo
 }

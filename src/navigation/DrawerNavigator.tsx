@@ -44,16 +44,19 @@ export default function DrawerNavigator() {
         component={HomeScreen}
         options={{ title: "Home" }}
       />
+
       <Drawer.Screen
         name="Menu"
         component={MenuStackNavigator}
         options={({ navigation }) => ({
           title: "Menu",
+          unmountOnBlur: true,
           headerRight: () => (
             <CartIconWithBadge onPress={() => navigation.jumpTo("Cart")} />
           ),
         })}
       />
+
       <Drawer.Screen
         name="Cart"
         component={CartScreen}
@@ -61,7 +64,10 @@ export default function DrawerNavigator() {
           title: "Cart",
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigation.jumpTo("Menu")}
+              onPress={() =>
+                navigation.jumpTo("Menu", { screen: "MenuScreen" })
+              }
+              accessibilityLabel="Navigate to Menu"
               style={{ marginRight: 12 }} // ensures it's not cut off
             >
               <Icon

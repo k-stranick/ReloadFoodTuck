@@ -81,4 +81,19 @@ export const styles = StyleSheet.create({
         fontWeight: "bold",
         color: Color.TEXT,
     },
+
+    centeredCard: {
+        alignSelf: "center",
+        maxWidth: 700,
+    },
+    scrollViewContent: {
+        alignItems: "center",
+        paddingVertical: 16,
+    },
+    safeArea: {
+        flex: 1,
+    },
+    themedView: {
+        flex: 1,
+    },
 });
